@@ -1,0 +1,55 @@
+{
+  "actualizado": "31/10/2026",
+  "fuente_general": {"nombre": "GUÍA CENTRAL MKT", "url": "https://docs.google.com/document/d/1bVrF1O1j_4rwDKzlwQhudARGKenRaGvYDJXPC4aVrjc/edit"},
+  "colores": {
+    "estado": "confirmado",
+    "fuente": {"nombre": "Identidad visual", "url": "https://docs.google.com/document/d/1cJ-byIWVmN07NtDCf77OlFyIDX-W2ry3LGcW4FlzrvQ/edit"},
+    "lista": [
+      {"nombre": "Blanco roto", "hex": "#F8F6F4"},
+      {"nombre": "Rosa suave", "hex": "#E28E91"},
+      {"nombre": "Rosa claro", "hex": "#F3D6D7"},
+      {"nombre": "Beige cálido", "hex": "#EDE3DC"},
+      {"nombre": "Negro suave", "hex": "#2A2A2A"}
+    ],
+    "nota": "Sin dorados. En fondos se prefiere crema, beige y taupe, con el rosa como acento."
+  },
+  "tipografias": {
+    "fuente": {"nombre": "Identidad visual", "url": "https://docs.google.com/document/d/1cJ-byIWVmN07NtDCf77OlFyIDX-W2ry3LGcW4FlzrvQ/edit"},
+    "lista": [
+      {"nombre": "Playfair Display", "css": "'Playfair Display', Georgia, serif", "estado": "en-uso", "uso": "Títulos de los carruseles aprobados. Falta confirmarlo como regla."},
+      {"nombre": "Montserrat", "css": "Montserrat, system-ui, sans-serif", "estado": "en-uso", "uso": "Textos y rótulos de los carruseles aprobados. Falta confirmarlo como regla."},
+      {"nombre": "Brittany", "css": "", "estado": "falta", "uso": "Confirmada en la identidad, pero sin uso definido (¿firmas, frases?). No se puede mostrar acá: no está en las fuentes web."}
+    ],
+    "pendiente": "MKT-09"
+  },
+  "bloques": [
+    {"icono": "logo", "titulo": "Logo", "estado": "falta",
+     "reglas": ["Usar siempre el logo original: nunca reconstruirlo ni inventarlo.", "Versiones: Negro, Color, Blanco y Logo corto (con su versión blanca).", "Conservar proporciones al agrandar o achicar.", "En historias (molde aprobado): 430 px de ancho en lienzo 1080 × 1920."],
+     "falta": "OK de Flor sobre las versiones que ordenó Yeyo (MKT-13).",
+     "fuente": {"nombre": "Logos oficiales", "url": "https://drive.google.com/drive/folders/1Cfy6RO4SRenomQZ-73PKXqvFYZZ0yfpb"}},
+    {"icono": "imagen", "titulo": "Estética y fondos", "estado": "confirmado",
+     "reglas": ["Minimalista, femenina y delicada, sin dorados.", "Fina y simple, con espacio para productos y textos; sedas y materiales sutiles.", "Sin exceso de decoración ni ruido visual.", "Los fondos los produce y aprueba Yeyo."],
+     "fuente": {"nombre": "Recursos de marca", "url": "https://drive.google.com/drive/folders/1mtuZE4Dwgw_XlcBEn9Yamj2YXUhK0l67"}},
+    {"icono": "etiqueta", "titulo": "Productos en las piezas", "estado": "confirmado",
+     "reglas": ["Envases fieles: forma, colores y etiquetas sin cambios.", "No inventar precios, stock, notas, duración ni beneficios.", "Productos PNG: 1000 × 1000 con aire, fondo transparente real."],
+     "fuente": {"nombre": "Productos PNG sin fondo", "url": "https://drive.google.com/drive/folders/1PEDDCG6pZCMfhaGSx9oqNHc8lgcPzfRJ"}},
+    {"icono": "megafono", "titulo": "Voz y tono", "estado": "confirmado",
+     "reglas": ["Español rioplatense, con voseo, cercano y natural.", "Sin frases forzadas ni llamados a comprar insistentes.", "Evitar: «gastar», «gasto menor», «perfumación», «presupuesto», «otro aroma para tus días».", "«Oler rico»: se evalúa en contexto, no está prohibido."],
+     "fuente": {"nombre": "GUÍA CENTRAL MKT", "url": "https://docs.google.com/document/d/1bVrF1O1j_4rwDKzlwQhudARGKenRaGvYDJXPC4aVrjc/edit"}},
+    {"icono": "libro", "titulo": "Estilo Educacional", "estado": "confirmado",
+     "reglas": ["Portada que despierta interés → puente con una situación cotidiana → explicación útil → cierre natural.", "El cierre no se convierte en venta.", "Modelo: Body Splash vs. Eau de Parfum (5 placas)."],
+     "falta": "Variantes propuestas sin aprobar (MKT-10).",
+     "fuente": {"nombre": "Referencia en Canva", "url": "https://www.canva.com/d/w493jyJ_QvFpgUd"}},
+    {"icono": "etiqueta", "titulo": "Estilo Venta", "estado": "confirmado",
+     "reglas": ["Descubrimiento → presentación → notas → carácter → para quién es → cierre de marca.", "«Próximamente» o «nuevo lanzamiento» solo si es cierto.", "Modelo: Onyx Tiaré (6 placas)."],
+     "falta": "Variantes propuestas sin aprobar (MKT-11).",
+     "fuente": {"nombre": "Referencia en Canva", "url": "https://www.canva.com/d/4bYYayWc52AOdpZ"}},
+    {"icono": "capas", "titulo": "Formatos y medidas", "estado": "confirmado",
+     "reglas": ["Carrusel de feed: 1080 × 1350.", "Historia: 1080 × 1920.", "Frases: nota estilo iPhone en PNG transparente, texto regular sin negrita, separada del fondo y del logo."],
+     "fuente": {"nombre": "Molde de historias", "url": "https://www.canva.com/d/ITbN48TWsWeyuHM"}},
+    {"icono": "lista", "titulo": "Procedimientos", "estado": "falta",
+     "reglas": ["Vigentes: crear carrusel, frases inspiradoras, productos PNG y notas olfativas PNG.", "Pendientes de formalizar: foto de producto, crear reel, copy y CTA, historias, exportar y planificar campaña."],
+     "falta": "Escribir los procedimientos que faltan cuando se trabaje cada formato.",
+     "fuente": {"nombre": "GUÍA CENTRAL MKT", "url": "https://docs.google.com/document/d/1bVrF1O1j_4rwDKzlwQhudARGKenRaGvYDJXPC4aVrjc/edit"}}
+  ]
+}

@@ -35,6 +35,7 @@ def main():
         "actualizado": datetime.now(ar).strftime("%d/%m/%Y %H:%M"),
         "filas": filas,
         "enlaces": enlaces,
+        "manual": json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "manual.json"), encoding="utf-8")) if os.path.exists(os.path.join(os.path.dirname(os.path.abspath(__file__)), "manual.json")) else None,
     }
     sal, iv = os.urandom(16), os.urandom(12)
     kdf = PBKDF2HMAC(algorithm=hashes.SHA256(), length=32, salt=sal, iterations=ITER)

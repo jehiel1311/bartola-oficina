@@ -94,7 +94,46 @@ button,input{font:inherit;color:inherit}
 .saltos .ic{width:16px;height:16px;color:var(--rosa)}
 html{scroll-behavior:smooth}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
-#esperan,#t-accesos,#t-tareas{scroll-margin-top:80px}
+#esperan,#t-accesos,#t-tareas,#t-manual{scroll-margin-top:80px}
+/* Manual de marca */
+.manual{margin-top:44px}
+.manual > p{margin:4px 0 18px;color:var(--tinta-suave);font-size:14px}
+.falta-caja{display:flex;gap:12px;align-items:flex-start;padding:16px 18px;border-radius:18px;background:color-mix(in srgb, var(--rosa-claro) 70%, transparent);margin-bottom:14px}
+.falta-caja h3{margin:0 0 4px;font-size:14px}
+.falta-caja ul{margin:0;padding-left:18px;font-size:13.5px}
+.falta-caja .ic{color:var(--rosa);margin-top:2px}
+.m-grilla{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:12px}
+.m-card{padding:18px 20px;border-radius:20px;background:color-mix(in srgb, var(--papel) 90%, transparent);border:1px solid var(--linea);display:flex;flex-direction:column}
+.m-card.ancha{grid-column:1/-1}
+.m-cab{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.m-cab h3{margin:0;font-family:var(--serif);font-weight:500;font-size:19px}
+.m-cab .chip{margin-left:auto}
+.chip{display:inline-flex;align-items:center;gap:5px;font-size:11.5px;font-weight:600;padding:3px 10px;border-radius:999px;white-space:nowrap}
+.chip .ic{width:13px;height:13px;stroke-width:2}
+.chip.confirmado{background:#E3EEE6;color:#3F6B4C}
+.chip.en-uso{background:var(--beige);color:var(--tinta)}
+.chip.falta{background:var(--rosa-claro);color:#9B4A4F}
+@media (prefers-color-scheme: dark){.chip.confirmado{background:#2F3D33;color:#A9D1B4}.chip.falta{color:#F0A2A5}}
+.m-card ul{margin:0;padding-left:18px;font-size:13.5px}
+.m-card li{padding:2px 0}
+.m-falta{margin:12px 0 0;font-size:13px;color:#9B4A4F;display:flex;gap:6px}
+@media (prefers-color-scheme: dark){.m-falta{color:#F0A2A5}}
+.m-falta .ic{width:15px;height:15px;flex:none;margin-top:2px}
+.m-fuente{margin-top:auto;padding-top:14px}
+.m-fuente a{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:var(--tinta);text-decoration:none;border-bottom:1px solid var(--rosa)}
+.m-fuente .ic{width:14px;height:14px;color:var(--rosa)}
+.swatches{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+@media (max-width:620px){.swatches{grid-template-columns:repeat(3,1fr)}}
+.swatch{border-radius:16px;overflow:hidden;border:1px solid var(--linea);background:var(--papel)}
+.swatch i{display:block;height:74px}
+.swatch b{display:block;font-size:12.5px;padding:8px 10px 0}
+.swatch code{display:block;font-size:11.5px;color:var(--tinta-suave);padding:0 10px 9px;font-family:inherit}
+.tipos{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px}
+.tipo{padding:14px 16px;border-radius:16px;border:1px solid var(--linea);background:var(--papel)}
+.tipo .muestra{font-size:34px;line-height:1.1;margin:6px 0 8px}
+.tipo .muestra.sin{font-size:15px;color:var(--tinta-suave);font-style:italic}
+.tipo p{margin:0;font-size:12.5px;color:var(--tinta-suave)}
+.tipo-cab{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:13px;font-weight:600}
 .salir{display:inline-flex;align-items:center;gap:6px;background:var(--papel);border:1px solid var(--linea);border-radius:999px;padding:7px 14px;font-size:13px;cursor:pointer;color:var(--tinta-suave)}
 .salir:hover{border-color:var(--rosa);color:var(--tinta)}
 
@@ -336,6 +375,7 @@ details.cerradas .tarea{opacity:.7}
   <nav class="saltos" aria-label="Secciones">
     <a href="#esperan"><svg class="ic" aria-hidden="true"><use href="#i-persona"/></svg>Qué espera</a>
     <a href="#t-accesos"><svg class="ic" aria-hidden="true"><use href="#i-brujula"/></svg>Dónde está cada cosa</a>
+    <a href="#t-manual"><svg class="ic" aria-hidden="true"><use href="#i-paleta"/></svg>Manual de marca</a>
     <a href="#t-tareas"><svg class="ic" aria-hidden="true"><use href="#i-tareas"/></svg>Tareas</a>
   </nav>
   <div class="cifras" id="cifras"></div>
@@ -363,6 +403,12 @@ details.cerradas .tarea{opacity:.7}
         <dt>Hace N días</dt><dd>Cuánto lleva abierta. Desde 21 días se marca en rosa fuerte.</dd>
       </dl>
     </details>
+  </section>
+
+  <section class="manual" aria-labelledby="t-manual" id="manual" hidden>
+    <h2 class="seccion-titulo" id="t-manual"><span class="ic-caja"><svg class="ic" aria-hidden="true"><use href="#i-paleta"/></svg></span>Manual de marca</h2>
+    <p id="manual-sub">Lo que usamos hoy para diseñar y escribir, de dónde sale y qué falta definir.</p>
+    <div id="manual-cuerpo"></div>
   </section>
 
   <h2 class="seccion-titulo" id="t-tareas" style="margin-top:44px"><span class="ic-caja"><svg class="ic" aria-hidden="true"><use href="#i-tareas"/></svg></span>Tareas</h2>
@@ -402,7 +448,7 @@ const ICONO_AREA = {WEB:"tienda", OFICINA:"oficina", MKT:"megafono"};
 const ICONO_ESTADO = {"IDEA":"idea","PARA REVISAR":"ojo","PROPUESTA":"lapiz","APROBADO":"check","EN CURSO":"play","PROBADO":"check","POR VERIFICAR":"lupa","PUBLICADO":"listo","HECHO":"listo","MEDIDO":"listo","DESCARTADO":"cerrar"};
 const ic = n => `<svg class="ic" aria-hidden="true"><use href="#i-${n}"/></svg>`;
 const LLAVE_LOCAL = "bartola-oficina-clave";
-let filas = [], enlaces = [], filtro = "todo";
+let filas = [], enlaces = [], manual = null, filtro = "todo";
 const DIA = 86400000;
 function hoyAR(){ const a = new Date(Date.now() - 3*3600000); return Date.UTC(a.getUTCFullYear(), a.getUTCMonth(), a.getUTCDate()); }
 function aFecha(t){ const m = /(\d{1,2})\/(\d{1,2})\/(\d{4})/.exec(t || ""); return m ? Date.UTC(+m[3], +m[2]-1, +m[1]) : null; }
@@ -435,7 +481,7 @@ async function entrar(clave, recordar){
   try{
     const d = await abrir(clave);
     if(recordar) guardar(clave);
-    filas = d.filas || []; enlaces = d.enlaces || [];
+    filas = d.filas || []; enlaces = d.enlaces || []; manual = d.manual || null;
     $("#actualizado").textContent = "Datos del TABLERO al " + d.actualizado;
     const hAR = new Date(Date.now() - 3*3600000).getUTCHours();
     const fecha = new Date().toLocaleDateString("es-AR", {weekday:"long", day:"numeric", month:"long", timeZone:"America/Argentina/Buenos_Aires"});
@@ -505,6 +551,31 @@ function abrirDetalle(e){
   if(typeof d.showModal === "function") d.showModal(); else window.open(e.url, "_blank", "noopener");
 }
 
+const ESTADO_TXT = {"confirmado":["Confirmado","listo"],"en-uso":["En uso, falta confirmar","reloj"],"falta":["Falta definir","idea"]};
+const chip = e => { const [t, i] = ESTADO_TXT[e] || ESTADO_TXT.falta; return `<span class="chip ${e}">${ic(i)}${t}</span>`; };
+const fuente = f => f ? `<div class="m-fuente"><a href="${esc(f.url)}" target="_blank" rel="noopener">${ic("afuera")}Abrir ${esc(f.nombre)}</a></div>` : "";
+
+function pintarManual(){
+  const sec = $("#manual");
+  if(!manual){ sec.hidden = true; return; }
+  sec.hidden = false;
+  const m = manual, faltas = [];
+  m.tipografias.lista.filter(t => t.estado !== "confirmado").forEach(t => faltas.push(`Tipografía ${t.nombre}: ${t.estado === "en-uso" ? "confirmar su uso" : "definir para qué se usa"}${m.tipografias.pendiente ? ` (${m.tipografias.pendiente})` : ""}.`));
+  m.bloques.filter(b => b.falta).forEach(b => faltas.push(`${b.titulo}: ${b.falta}`));
+  const colores = `<article class="m-card ancha"><div class="m-cab"><span class="ic-caja">${ic("paleta")}</span><h3>Colores</h3>${chip(m.colores.estado)}</div>
+    <div class="swatches">${m.colores.lista.map(c => `<div class="swatch"><i style="background:${esc(c.hex)}"></i><b>${esc(c.nombre)}</b><code>${esc(c.hex)}</code></div>`).join("")}</div>
+    ${m.colores.nota ? `<p class="area-resumen" style="margin-top:12px">${esc(m.colores.nota)}</p>` : ""}${fuente(m.colores.fuente)}</article>`;
+  const tipos = `<article class="m-card ancha"><div class="m-cab"><span class="ic-caja">${ic("lapiz")}</span><h3>Tipografías</h3>${chip(m.tipografias.lista.every(t => t.estado === "confirmado") ? "confirmado" : "falta")}</div>
+    <div class="tipos">${m.tipografias.lista.map(t => `<div class="tipo"><div class="tipo-cab">${esc(t.nombre)} ${chip(t.estado)}</div>
+      ${t.css ? `<div class="muestra" style="font-family:${esc(t.css)}">Bartola Aa</div>` : `<div class="muestra sin">Vista no disponible en la web</div>`}<p>${esc(t.uso)}</p></div>`).join("")}</div>${fuente(m.tipografias.fuente)}</article>`;
+  const bloques = m.bloques.map(b => `<article class="m-card"><div class="m-cab"><span class="ic-caja">${ic(b.icono || "carpeta")}</span><h3>${esc(b.titulo)}</h3>${chip(b.estado)}</div>
+    <ul>${b.reglas.map(r => `<li>${esc(r)}</li>`).join("")}</ul>
+    ${b.falta ? `<p class="m-falta">${ic("idea")}<span>Falta: ${esc(b.falta)}</span></p>` : ""}${fuente(b.fuente)}</article>`).join("");
+  const caja = faltas.length ? `<div class="falta-caja">${ic("lista")}<div><h3>Qué falta completar en el manual (${faltas.length})</h3><ul>${faltas.map(f => `<li>${esc(f)}</li>`).join("")}</ul></div></div>` : "";
+  $("#manual-sub").textContent = `Lo que usamos hoy para diseñar y escribir, de dónde sale y qué falta definir. Revisado el ${m.actualizado}.`;
+  $("#manual-cuerpo").innerHTML = caja + `<div class="m-grilla">${colores}${tipos}${bloques}</div>`;
+}
+
 function pintarResumen(){
   const abiertas = filas.filter(f => !CERRADOS.includes(f.Estado));
   const esperan = p => filas.filter(f => f.Decide === p && ESPERAN.includes(f.Estado)).length;
@@ -551,6 +622,7 @@ function pintarAvisos(){
 function pintar(){
   pintarResumen();
   pintarEnlaces();
+  pintarManual();
   pintarAvisos();
   pintarEsperan();
   const vista = filas.filter(f => filtro === "todo" || f.Decide === filtro || f["Lo hace"] === filtro);
