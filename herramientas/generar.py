@@ -76,6 +76,7 @@ def main():
         "enlaces": enlaces,
         "avisos": avisos,
         "propuestas": propuestas,
+        "memoria": json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "memoria.json"), encoding="utf-8")) if os.path.exists(os.path.join(os.path.dirname(os.path.abspath(__file__)), "memoria.json")) else None,
         "manual": json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "manual.json"), encoding="utf-8")) if os.path.exists(os.path.join(os.path.dirname(os.path.abspath(__file__)), "manual.json")) else None,
     }
     sal, iv = os.urandom(16), os.urandom(12)

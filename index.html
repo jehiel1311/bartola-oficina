@@ -95,6 +95,48 @@ button,input{font:inherit;color:inherit}
 html{scroll-behavior:smooth}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 #esperan,#t-accesos,#t-tareas,#t-manual{scroll-margin-top:80px}
+/* Vista por persona */
+.vista{display:flex;gap:4px;margin-left:auto;padding:4px;border-radius:999px;background:color-mix(in srgb, var(--papel) 80%, transparent);border:1px solid var(--linea)}
+.vista button{border:0;background:none;padding:6px 12px;border-radius:999px;font-size:12.5px;cursor:pointer;color:var(--tinta-suave)}
+.vista button[aria-pressed="true"]{background:var(--tinta);color:var(--fondo);font-weight:600}
+.cab-arriba{flex-wrap:wrap}
+@media (max-width:620px){.vista{order:3;margin-left:0;width:100%;justify-content:center}}
+.persona.tuyo{background:color-mix(in srgb, var(--rosa-claro) 35%, transparent)}
+/* Barra de avance */
+.avance{display:flex;align-items:center;gap:10px;margin:2px 0 8px;font-size:12px;color:var(--tinta-suave)}
+.avance .barra{flex:1;max-width:260px;height:7px;border-radius:999px;background:var(--fondo);overflow:hidden;border:1px solid var(--linea)}
+.avance .barra i{display:block;height:100%;border-radius:999px;background:linear-gradient(90deg,var(--rosa-claro),var(--rosa))}
+/* Memoria */
+.memoria{margin-top:44px}
+.mem-sub{margin:4px 0 14px;color:var(--tinta-suave);font-size:14px}
+.buscador{position:relative;max-width:560px}
+.buscador .ic{position:absolute;left:16px;top:50%;transform:translateY(-50%);color:var(--tinta-suave)}
+.buscador input{width:100%;padding:13px 16px 13px 44px;border-radius:999px;border:1px solid var(--linea);background:var(--papel);font-size:15px}
+.buscador input:focus{outline:none;border-color:var(--rosa);box-shadow:0 0 0 3px var(--rosa-claro)}
+.resultados{margin-top:12px;padding:14px 16px;border-radius:18px;background:var(--papel);border:1px solid var(--linea)}
+.resultados h3{margin:0 0 8px;font-size:13px;color:var(--tinta-suave);font-weight:600}
+.resultados ul{list-style:none;margin:0;padding:0}
+.resultados li{padding:9px 0;border-top:1px dashed var(--linea);font-size:14px}
+.resultados li:first-child{border-top:0}
+.resultados li small{display:block;color:var(--tinta-suave);font-size:12px}
+.resultados mark{background:var(--rosa-claro);color:inherit;border-radius:3px;padding:0 2px}
+.pestanas{display:flex;gap:6px;overflow-x:auto;margin:18px 0 12px;padding-bottom:4px}
+.pestanas button{display:inline-flex;align-items:center;gap:7px;white-space:nowrap;border:1px solid var(--linea);background:color-mix(in srgb, var(--papel) 80%, transparent);border-radius:999px;padding:8px 14px;font-size:13px;cursor:pointer;color:var(--tinta)}
+.pestanas button .ic{width:16px;height:16px;color:var(--rosa)}
+.pestanas button[aria-selected="true"]{background:var(--tinta);color:var(--fondo);border-color:var(--tinta)}
+.pestanas button[aria-selected="true"] .ic{color:var(--rosa-claro)}
+.mem-card{padding:22px 24px;border-radius:24px;background:color-mix(in srgb, var(--papel) 92%, transparent);border:1px solid var(--linea)}
+.mem-card > header{display:flex;align-items:center;gap:12px;margin-bottom:6px}
+.mem-card > header h3{margin:0;font-family:var(--serif);font-weight:500;font-size:22px}
+.mem-card > p{margin:0 0 10px;color:var(--tinta-suave);font-size:14px}
+.mem-items{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:10px}
+.mem-item{padding:14px 16px;border-radius:16px;background:var(--papel);border:1px solid var(--linea)}
+.mem-item h4{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin:0 0 6px;font-size:14.5px}
+.mem-item p{margin:0;font-size:13.5px;color:var(--tinta);line-height:1.55}
+.mem-fuentes{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:16px}
+.mem-fuentes a{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:var(--tinta);text-decoration:none;border-bottom:1px solid var(--rosa)}
+.mem-fuentes .ic{width:14px;height:14px;color:var(--rosa)}
+
 /* Propuestas */
 .propuestas{margin-top:22px;padding:22px 24px;border-radius:24px;border:1px dashed color-mix(in srgb, var(--rosa) 60%, var(--linea));background:color-mix(in srgb, var(--papel) 75%, transparent)}
 .prop-cab{display:flex;gap:14px;align-items:flex-start}
@@ -360,6 +402,11 @@ details.cerradas .tarea{opacity:.7}
         <img class="logo" src="LOGO%20Color.png" alt="Bartola Beauty" onerror="this.closest('picture').remove();document.getElementById('sello-cab').hidden=false">
       </picture>
       <div class="sello" id="sello-cab" hidden aria-label="Bartola Beauty"><img src="favicon.png" alt=""><span class="nombre">Bartola</span><span class="beauty">beauty</span></div>
+      <div class="vista" role="group" aria-label="Ver la Oficina como">
+        <button type="button" data-v="todo" aria-pressed="true">Todo</button>
+        <button type="button" data-v="Flor" aria-pressed="false">Soy Flor</button>
+        <button type="button" data-v="Yeyo" aria-pressed="false">Soy Yeyo</button>
+      </div>
       <button class="salir" id="salir" type="button"><svg class="ic" aria-hidden="true"><use href="#i-salir"/></svg> Salir</button>
     </div>
     <div class="cab-cuerpo">
@@ -385,6 +432,7 @@ details.cerradas .tarea{opacity:.7}
   <nav class="saltos" aria-label="Secciones">
     <a href="#esperan"><svg class="ic" aria-hidden="true"><use href="#i-persona"/></svg>Qué espera</a>
     <a href="#t-accesos"><svg class="ic" aria-hidden="true"><use href="#i-brujula"/></svg>Dónde está cada cosa</a>
+    <a href="#t-memoria"><svg class="ic" aria-hidden="true"><use href="#i-libro"/></svg>Memoria MKT</a>
     <a href="#t-manual"><svg class="ic" aria-hidden="true"><use href="#i-paleta"/></svg>Manual de marca</a>
     <a href="#t-tareas"><svg class="ic" aria-hidden="true"><use href="#i-tareas"/></svg>Tareas</a>
   </nav>
@@ -422,6 +470,15 @@ details.cerradas .tarea{opacity:.7}
         <dt>Hace N días</dt><dd>Cuánto lleva abierta. Desde 21 días se marca en rosa fuerte.</dd>
       </dl>
     </details>
+  </section>
+
+  <section class="memoria" id="memoria" hidden aria-labelledby="t-memoria">
+    <h2 class="seccion-titulo" id="t-memoria"><span class="ic-caja"><svg class="ic" aria-hidden="true"><use href="#i-libro"/></svg></span>Memoria de MKT</h2>
+    <p class="mem-sub">Lo importante de cada cosa, para recordar sin abrir diez documentos. Cada dato dice de qué archivo sale.</p>
+    <div class="buscador"><svg class="ic" aria-hidden="true"><use href="#i-lupa"/></svg><input type="search" id="buscar" placeholder="Buscar en toda la Oficina: «margen», «Rocket», «Brittany»…" aria-label="Buscar en toda la Oficina"></div>
+    <div id="resultados" class="resultados" hidden aria-live="polite"></div>
+    <div class="pestanas" role="tablist" id="pestanas"></div>
+    <div id="mem-panel"></div>
   </section>
 
   <section class="manual" aria-labelledby="t-manual" id="manual" hidden>
@@ -467,7 +524,10 @@ const ICONO_AREA = {WEB:"tienda", OFICINA:"oficina", MKT:"megafono"};
 const ICONO_ESTADO = {"IDEA":"idea","PARA REVISAR":"ojo","PROPUESTA":"lapiz","APROBADO":"check","EN CURSO":"play","PROBADO":"check","POR VERIFICAR":"lupa","PUBLICADO":"listo","HECHO":"listo","MEDIDO":"listo","DESCARTADO":"cerrar"};
 const ic = n => `<svg class="ic" aria-hidden="true"><use href="#i-${n}"/></svg>`;
 const LLAVE_LOCAL = "bartola-oficina-clave";
-let filas = [], enlaces = [], manual = null, avisosExtra = [], propuestas = [], filtro = "todo";
+let filas = [], enlaces = [], manual = null, avisosExtra = [], propuestas = [], memoria = null, pestana = null, filtro = "todo", vista = "todo";
+const LLAVE_VISTA = "bartola-oficina-vista";
+try{ vista = localStorage.getItem(LLAVE_VISTA) || "todo"; }catch(e){}
+filtro = vista;
 const DIA = 86400000;
 function hoyAR(){ const a = new Date(Date.now() - 3*3600000); return Date.UTC(a.getUTCFullYear(), a.getUTCMonth(), a.getUTCDate()); }
 function aFecha(t){ const m = /(\d{1,2})\/(\d{1,2})\/(\d{4})/.exec(t || ""); return m ? Date.UTC(+m[3], +m[2]-1, +m[1]) : null; }
@@ -500,7 +560,7 @@ async function entrar(clave, recordar){
   try{
     const d = await abrir(clave);
     if(recordar) guardar(clave);
-    filas = d.filas || []; enlaces = d.enlaces || []; manual = d.manual || null; avisosExtra = d.avisos || []; propuestas = d.propuestas || [];
+    filas = d.filas || []; enlaces = d.enlaces || []; manual = d.manual || null; avisosExtra = d.avisos || []; propuestas = d.propuestas || []; memoria = d.memoria || null;
     $("#actualizado").textContent = "Datos del TABLERO al " + d.actualizado;
     const hAR = new Date(Date.now() - 3*3600000).getUTCHours();
     const fecha = new Date().toLocaleDateString("es-AR", {weekday:"long", day:"numeric", month:"long", timeZone:"America/Argentina/Buenos_Aires"});
@@ -519,7 +579,8 @@ async function entrar(clave, recordar){
 }
 
 function pintarEsperan(){
-  const html = ["Flor","Yeyo"].map(p => {
+  const orden = vista === "Yeyo" ? ["Yeyo","Flor"] : ["Flor","Yeyo"];
+  const html = orden.map(p => {
     const suyas = filas.filter(f => f.Decide === p && ESPERAN.includes(f.Estado));
     const porArea = {};
     suyas.forEach(f => (porArea[f["Área"]] ||= []).push(f));
@@ -527,7 +588,7 @@ function pintarEsperan(){
     const items = suyas.length
       ? orden.map(k => `<div class="sub-area"><h3>${ic(ICONO_AREA[k] || "carpeta")}${esc(AREAS[k] || k)} <small>${porArea[k].length}</small></h3><ul>${porArea[k].map(f => `<li>${esc(f.Tarea)} <small>· ${esc(f.ID)}</small></li>`).join("")}</ul></div>`).join("")
       : `<p class="nada">Nada esperando. Al día.</p>`;
-    return `<article class="persona" data-p="${p}">
+    return `<article class="persona${vista === p ? " tuyo" : ""}" data-p="${p}">
       <div class="persona-cab"><span class="inicial" aria-hidden="true">${p[0]}</span>
       <div><h2>${p}</h2><span class="sub">${suyas.length === 1 ? "espera su decisión" : "esperan su decisión"}</span></div><span class="cuenta">${suyas.length}</span></div>
       ${items}</article>`;
@@ -595,6 +656,41 @@ function pintarManual(){
   $("#manual-cuerpo").innerHTML = caja + `<div class="m-grilla">${colores}${tipos}${bloques}</div>`;
 }
 
+function pintarMemoria(){
+  const sec = $("#memoria");
+  if(!memoria){ sec.hidden = true; return; }
+  sec.hidden = false;
+  const S = memoria.secciones;
+  if(!pestana || !S.find(x => x.id === pestana)) pestana = S[0].id;
+  $("#pestanas").innerHTML = S.map(x => `<button type="button" role="tab" aria-selected="${x.id === pestana}" data-tab="${x.id}">${ic(x.icono)}${esc(x.titulo)}</button>`).join("");
+  const x = S.find(y => y.id === pestana);
+  $("#mem-panel").innerHTML = `<article class="mem-card" role="tabpanel"><header><span class="ic-caja">${ic(x.icono)}</span><h3>${esc(x.titulo)}</h3></header><p>${esc(x.resumen)}</p>
+    <div class="mem-items">${x.items.map(i => `<div class="mem-item"><h4><span>${esc(i.t)}</span>${chip(i.e)}</h4><p>${esc(i.d)}</p></div>`).join("")}</div>
+    <div class="mem-fuentes">${(x.fuentes || []).map(f => `<a href="${esc(f.url)}" target="_blank" rel="noopener">${ic("afuera")}${esc(f.nombre)}</a>`).join("")}</div></article>`;
+}
+
+function normal(t){ return String(t || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, ""); }
+function resaltar(texto, q){
+  const t = String(texto || ""), n = normal(t), i = n.indexOf(q);
+  if(i < 0) return esc(t.length > 160 ? t.slice(0,160) + "…" : t);
+  const ini = Math.max(0, i - 60), fin = Math.min(t.length, i + q.length + 90);
+  return (ini ? "…" : "") + esc(t.slice(ini, i)) + "<mark>" + esc(t.slice(i, i + q.length)) + "</mark>" + esc(t.slice(i + q.length, fin)) + (fin < t.length ? "…" : "");
+}
+function buscar(qCrudo){
+  const caja = $("#resultados"), q = normal(qCrudo.trim());
+  if(q.length < 2){ caja.hidden = true; caja.innerHTML = ""; return; }
+  const res = [];
+  (memoria?.secciones || []).forEach(x => x.items.forEach(i => { const txt = i.t + " " + i.d; if(normal(txt).includes(q)) res.push({donde: "Memoria · " + x.titulo, titulo: i.t, texto: i.d}); }));
+  (manual?.bloques || []).forEach(b => b.reglas.forEach(r => { if(normal(b.titulo + " " + r).includes(q)) res.push({donde: "Manual · " + b.titulo, titulo: b.titulo, texto: r}); }));
+  (manual?.tipografias?.lista || []).forEach(t => { if(normal(t.nombre + " " + t.uso).includes(q)) res.push({donde: "Manual · Tipografías", titulo: t.nombre, texto: t.uso}); });
+  filas.forEach(f => { const txt = f.Tarea + " " + (f["Notas / enlace"] || ""); if(normal(txt).includes(q)) res.push({donde: "Tarea " + f.ID + " · " + f.Estado, titulo: f.Tarea, texto: f["Notas / enlace"] || ""}); });
+  enlaces.forEach(e => { const txt = e.nombre + " " + e.descripcion + " " + (e.detalle || []).join(" "); if(normal(txt).includes(q)) res.push({donde: "Acceso", titulo: e.nombre, texto: e.descripcion}); });
+  caja.hidden = false;
+  caja.innerHTML = res.length
+    ? `<h3>${res.length} ${res.length === 1 ? "resultado" : "resultados"}</h3><ul>${res.slice(0,25).map(r => `<li><strong>${resaltar(r.titulo, q)}</strong><small>${esc(r.donde)}</small>${r.texto ? `<div>${resaltar(r.texto, q)}</div>` : ""}</li>`).join("")}</ul>`
+    : `<h3>Sin resultados para «${esc(qCrudo.trim())}»</h3><p class="area-resumen">Probá con otra palabra. Si es algo que no está en ningún lado, quizás haya que anotarlo en Drive.</p>`;
+}
+
 function pintarPropuestas(){
   const sec = $("#propuestas");
   sec.hidden = !propuestas.length;
@@ -650,6 +746,7 @@ function pintar(){
   pintarEnlaces();
   pintarManual();
   pintarPropuestas();
+  pintarMemoria();
   pintarAvisos();
   pintarEsperan();
   const vista = filas.filter(f => filtro === "todo" || f.Decide === filtro || f["Lo hace"] === filtro);
@@ -662,6 +759,7 @@ function pintar(){
     return `<section class="area">
       <h2><span class="ic-caja">${ic(ICONO_AREA[a] || "carpeta")}</span>${esc(AREAS[a] || a)} <small>${abiertas.length} abiertas</small></h2>
       <p class="area-resumen">${resumenArea(grupos[a])}</p>
+      ${(() => { const todas = filas.filter(f => f["Área"] === a); const c = todas.filter(f => CERRADOS.includes(f.Estado)).length; const pct = todas.length ? Math.round(c * 100 / todas.length) : 0; return `<div class="avance" title="${c} de ${todas.length} cerradas"><span class="barra"><i style="width:${pct}%"></i></span>${c} de ${todas.length} cerradas · ${pct} %</div>`; })()}
       ${abiertas.map(tarea).join("")}
       ${cerradas.length ? `<details class="cerradas"><summary>${cerradas.length} cerradas</summary>${cerradas.map(tarea).join("")}</details>` : ""}
     </section>`;
@@ -669,6 +767,19 @@ function pintar(){
 }
 
 $("#form").addEventListener("submit", e => { e.preventDefault(); entrar($("#clave").value, $("#recordar").checked); });
+$("#pestanas").addEventListener("click", ev => { const b = ev.target.closest("[data-tab]"); if(b){ pestana = b.dataset.tab; pintarMemoria(); } });
+let tBuscar; $("#buscar").addEventListener("input", ev => { clearTimeout(tBuscar); tBuscar = setTimeout(() => buscar(ev.target.value), 150); });
+document.querySelectorAll(".vista button").forEach(b => {
+  b.setAttribute("aria-pressed", b.dataset.v === vista);
+  b.addEventListener("click", () => {
+    vista = b.dataset.v; filtro = vista;
+    try{ localStorage.setItem(LLAVE_VISTA, vista); }catch(e){}
+    document.querySelectorAll(".vista button").forEach(x => x.setAttribute("aria-pressed", x === b));
+    document.querySelectorAll(".filtro button").forEach(x => x.setAttribute("aria-pressed", x.dataset.f === filtro));
+    pintar();
+  });
+});
+document.querySelectorAll(".filtro button").forEach(x => x.setAttribute("aria-pressed", x.dataset.f === filtro));
 $("#accesos").addEventListener("click", ev => { const b = ev.target.closest(".tarjeta"); if(b) abrirDetalle(enlaces[+b.dataset.i]); });
 document.querySelectorAll("[data-cerrar]").forEach(b => b.addEventListener("click", () => $("#detalle").close()));
 $("#detalle").addEventListener("click", ev => { if(ev.target === ev.currentTarget) ev.currentTarget.close(); });

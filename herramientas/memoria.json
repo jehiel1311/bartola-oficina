@@ -1,0 +1,84 @@
+{
+  "actualizado": "31/10/2026",
+  "secciones": [
+    {"id": "negocio", "icono": "tienda", "titulo": "Negocio y público",
+     "resumen": "Qué vendemos, a quién y la regla del margen.",
+     "items": [
+       {"t": "Qué vende Bartola", "e": "confirmado", "d": "Reventa de productos originales de marca (CHER, Dove, Nivea, Bagovit, La Puissance, Claridge, Antonio Banderas, KR, Boos, Las Oreiro): perfumes, body splash, cremas, cuidado capilar y manos. Decir «productos originales a precio de reventa»; nunca «alternativo», «tipo» ni «réplica»."},
+       {"t": "La regla del margen", "e": "confirmado", "d": "El margen real es del 35 % o menos. Un 10 % de descuento se come cerca del 29 % de la ganancia de esa venta, y un frasco regalado equivale a la ganancia de unas 3 ventas. Las muestras son el sachet capilar o la tira perfumada, no el frasco. Todavía no se paga publicidad: primero se valida qué mensaje funciona orgánico."},
+       {"t": "A quién le hablamos", "e": "confirmado", "d": "Mujer de 22 a 45 (también hombres que cuidan su imagen), con ingreso propio, que compra online y sigue cuentas de belleza. Quiere una rutina simple y un perfume que la identifique; se paraliza ante tanta información y teme «gastar y que no le sirva». Decide viendo contenido varias veces y compra por mensaje directo."},
+       {"t": "Mensaje clave", "e": "confirmado", "d": "Simplicidad, personalización y confianza. Nunca hablar en genérico."},
+       {"t": "Argumento estrella", "e": "en-uso", "d": "La piel hidratada retiene el aroma, así que el perfume rinde más: el combo crema + perfume es lo que hace rendir el producto. Decirlo con prudencia, sin prometer «el doble»."},
+       {"t": "Barrio o digital", "e": "falta", "d": "Abierto: el público ideal compra por mensaje, pero en agosto se pidió apuntar a clientas del barrio. Propuesta: el sachet capilar como puente (se entrega en mano y a los días se pregunta por mensaje). Falta que Flor elija la prioridad."}
+     ],
+     "fuentes": [
+       {"nombre": "Negocio, público y números", "url": "https://docs.google.com/document/d/1dBP_EFzTErheMFyg-cHZiCvEtsSyZ7jzf_WGfFntJxE/edit"},
+       {"nombre": "Estrategia MKT", "url": "https://docs.google.com/document/d/1kN8XNHeQxcML1WFacPQS6lF_7snDYFOegbBdFJoVwdE/edit"}
+     ]},
+    {"id": "estrategia", "icono": "brujula", "titulo": "Cómo comunicamos",
+     "resumen": "El enfoque editorial y las reglas de publicación.",
+     "items": [
+       {"t": "Enfoque", "e": "en-uso", "d": "Enseñar sobre aromas, notas, aplicación y cómo se siente en la piel, de forma cercana y sincera. Mezclar reels hablados y demostraciones con historias de conexión y venta sutil."},
+       {"t": "Lo que mejor funcionó", "e": "en-uso", "d": "Las piezas donde Flor habla o muestra los productos tuvieron mejor respuesta que las impersonales. Es una hipótesis: hay que confirmarla con métricas."},
+       {"t": "Precios", "e": "falta", "d": "En el feed de Instagram, sin precios. En grupos de WhatsApp o Facebook y por mensaje, sí. Falta que Flor lo confirme como regla."},
+       {"t": "Del borrador a la publicación", "e": "confirmado", "d": "Propuesta no es aprobada, y aprobada no es publicada. Flor valida antes de publicar. Nadie publica ni escribe a clientas sin su OK."},
+       {"t": "Producción posible", "e": "en-uso", "d": "Priorizar ideas rápidas y reutilizar material ya grabado. En octubre se planearon 20 piezas y se terminaron 2: el cuello de botella es la edición."}
+     ],
+     "fuentes": [
+       {"nombre": "Estrategia MKT", "url": "https://docs.google.com/document/d/1kN8XNHeQxcML1WFacPQS6lF_7snDYFOegbBdFJoVwdE/edit"},
+       {"nombre": "GUÍA CENTRAL MKT", "url": "https://docs.google.com/document/d/1bVrF1O1j_4rwDKzlwQhudARGKenRaGvYDJXPC4aVrjc/edit"}
+     ]},
+    {"id": "campanas", "icono": "megafono", "titulo": "Campañas",
+     "resumen": "Lo que se hizo por fecha especial y qué dejó.",
+     "items": [
+       {"t": "Día de los Novios (septiembre)", "e": "en-uso", "d": "Contenido educativo: preguntas frecuentes sobre perfumes, familias olfativas y propuesta de reel de dulces. Publicación de cada pieza sin verificar."},
+       {"t": "Onyx Tiaré (septiembre)", "e": "confirmado", "d": "Unboxing, reel de prueba en piel y carrusel de 6 placas (hoy es la referencia del estilo Venta). A las 24 h: unas 1.300 vistas, una venta confirmada y dos posibles."},
+       {"t": "Día de la Madre (octubre)", "e": "en-uso", "d": "Placas de combos: Rocket + bálsamo, CHER 18 Elixir y Glossy, Onyx, body splash + lotion y perfumes + crema. Precios de octubre (históricos, verificar antes de reusar): Rocket + bálsamo $30.000, CHER 18 $30.000, Onyx $32.000."},
+       {"t": "Historias de productos (octubre)", "e": "confirmado", "d": "Flor pidió placas solo con el logo arriba y espacio libre para sus textos, sin mensajes automáticos ni cajas cuando dice «solo frascos». Hubo problemas de envases deformados: revisar antes de aprobar."},
+       {"t": "Cómo se arma una campaña", "e": "confirmado", "d": "Objetivo y público, ideas, productos y fuentes, opciones de texto, calendario, piezas, aprobación, publicación, métricas reales y cierre."}
+     ],
+     "fuentes": [{"nombre": "Campañas MKT", "url": "https://docs.google.com/document/d/1QoQClaH22YoGsnj-upMWTG1Sy9CvzwvCs2AecSFkCbc/edit"}]},
+    {"id": "contenido", "icono": "capas", "titulo": "Contenido trabajado",
+     "resumen": "Piezas hechas, en revisión e ideas guardadas.",
+     "items": [
+       {"t": "Reel «Encantadora»", "e": "confirmado", "d": "Publicado el 28/09/2026: trend con la frase «Si te preguntan ¿otro perfume más? tú solo ignora». Métricas en la sección Resultados."},
+       {"t": "Carrusel Body Splash vs. Eau de Parfum", "e": "confirmado", "d": "Aprobado por Flor como referencia del estilo Educacional (5 placas). Lo terminó el 28/10; falta confirmar si se publicó (MKT-08)."},
+       {"t": "Carrusel «Elegir un perfume de regalo»", "e": "falta", "d": "Propuesta 02 en Canva, esperando la aprobación de Flor (MKT-04)."},
+       {"t": "Reels listos sin publicar", "e": "falta", "d": "«Dónde aplicar el perfume para que dure» (43 s, editado en CapCut) y review de CHER Rocket. Falta decidir cuándo salen y guardar los archivos en Drive (MKT-06)."},
+       {"t": "Historias de frases inspiradoras", "e": "confirmado", "d": "Molde aprobado: mano con llaves y cartera beige, CHER 17 asomando, nota estilo iPhone y logo original a 430 px. Frase de arranque: «Entre tantas cosas, un momento para vos.»"},
+       {"t": "Ideas guardadas", "e": "en-uso", "d": "Post «El aroma como huella» («Se van a olvidar de lo que dijiste. No de cómo olías.»), reel de preguntas frecuentes, carrusel de familias olfativas, reel de perfumes dulces y reel inspiracional nuevo (MKT-07)."}
+     ],
+     "fuentes": [
+       {"nombre": "Contenidos MKT", "url": "https://docs.google.com/document/d/1rJerfQZCjg6TkS_6bbF2pYZLNv7j1dAR2-vmToeJfOs/edit"},
+       {"nombre": "Molde de historias", "url": "https://www.canva.com/d/ITbN48TWsWeyuHM"}
+     ]},
+    {"id": "resultados", "icono": "lupa", "titulo": "Resultados",
+     "resumen": "Números reales que tenemos y cómo medir.",
+     "items": [
+       {"t": "Reel «Encantadora» (28/09)", "e": "confirmado", "d": "1.022 reproducciones, 397 personas, 9 s de promedio sobre unos 15 s, 41 me gusta, 8 comentarios, 8 compartidos, 2 guardados, 18 visitas al perfil y 0 seguidores nuevos. Lectura: buena interacción con quien ya sigue, poco alcance nuevo. Mejorar el gancho del primer segundo."},
+       {"t": "Onyx Tiaré (24 h)", "e": "en-uso", "d": "Unas 1.300 vistas, 700 personas, 13 s de retención, una venta y dos posibles. Falta confirmar a qué pieza exacta corresponde."},
+       {"t": "Qué anotar de cada publicación", "e": "confirmado", "d": "Fecha, formato, tema, gancho, duración, vistas, personas alcanzadas, promedio de reproducción, interacción, visitas al perfil, seguidores nuevos, consultas por mensaje y ventas con evidencia. Comparar a 24 h, 7 días y cierre."}
+     ],
+     "fuentes": [{"nombre": "Métricas MKT", "url": "https://docs.google.com/document/d/1Ndkp40x6R-LvZiodGH20Kr78cgak5RnI9a_TtHnu_bc/edit"}]},
+    {"id": "recursos", "icono": "imagen", "titulo": "Recursos y bases",
+     "resumen": "Frases, productos y notas olfativas que ya están listos.",
+     "items": [
+       {"t": "Frases inspiradoras", "e": "confirmado", "d": "39 frases registradas (B30-01 a B30-30 y ANT-00 a ANT-08). La próxima nueva es FI-040. Antes de escribir una, revisar el registro para no repetir ni en palabras ni en sentido."},
+       {"t": "Productos en PNG sin fondo", "e": "en-uso", "d": "Un archivo por producto, 1000 × 1000 con aire y transparencia real, fiel a la foto original. El control está en el inventario de Excel; hay revisiones de calidad abiertas."},
+       {"t": "Notas olfativas en PNG", "e": "confirmado", "d": "116 notas listas y revisadas (estilo aprobado: la bergamota), vinculadas a 35 variantes de producto. Las fuentes de cada perfume todavía se tienen que recontrastar."},
+       {"t": "Automatización diaria de PNG", "e": "confirmado", "d": "Chaty, todos los días a las 16:00, hasta 5 imágenes por día entre productos y notas. La decide y revisa Yeyo."}
+     ],
+     "fuentes": [
+       {"nombre": "Notas iPhone (frases)", "url": "https://drive.google.com/drive/folders/1xlsC7SwpAd21ODzoxknRafTTuppf3WMr"},
+       {"nombre": "Productos PNG", "url": "https://drive.google.com/drive/folders/1PEDDCG6pZCMfhaGSx9oqNHc8lgcPzfRJ"},
+       {"nombre": "Notas olfativas PNG", "url": "https://drive.google.com/drive/folders/1UQD82Fg8htizlK7WbBh9Yoib4bi6LNS1"}
+     ]},
+    {"id": "calendario", "icono": "reloj", "titulo": "Calendario",
+     "resumen": "Qué se planeó y qué se propone ahora.",
+     "items": [
+       {"t": "Octubre", "e": "confirmado", "d": "Se planearon 20 publicaciones y se terminaron 2 videos. El calendario es un plan, no un historial: no dar nada por publicado sin confirmarlo."},
+       {"t": "Noviembre (propuesta)", "e": "falta", "d": "3 publicaciones por semana: lunes sin cámara (carrusel), miércoles un clip liviano de 8 a 10 s y viernes un reel hablado de 30 s. No se publica hasta tener 4 piezas listas, y siempre 2 de reserva. Espera el OK de Flor (MKT-05)."}
+     ],
+     "fuentes": [{"nombre": "Calendario de noviembre", "url": "https://docs.google.com/document/d/1P8g5jKoPsqJfoGsUgOcLbUkBBdb4LAEdazln1dTPxXE/edit"}]}
+  ]
+}
