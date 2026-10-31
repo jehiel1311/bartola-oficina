@@ -159,8 +159,8 @@ details.det .cuerpo{margin-top:8px;padding:12px 14px;border-radius:12px;backgrou
 .panel.Flor{border-color:var(--flor-borde);background:linear-gradient(160deg,color-mix(in srgb,var(--flor-bg) 60%,var(--papel)),var(--papel) 55%)}
 .panel.Yeyo{border-color:var(--yeyo-borde);background:linear-gradient(160deg,color-mix(in srgb,var(--yeyo-bg) 70%,var(--papel)),var(--papel) 55%)}
 .panel header{display:flex;align-items:center;gap:12px}
-.panel .ini{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;font-family:var(--serif);font-size:19px}
-.panel.Flor .ini{background:var(--flor);color:var(--papel)} .panel.Yeyo .ini{background:var(--yeyo);color:var(--papel)}
+.panel .av-caja{width:50px;height:50px}
+.panel .av-caja .av{width:34px;height:34px}
 .panel h3{font-family:var(--serif);font-weight:500;font-size:21px}
 .panel .cuenta{margin-left:auto;font-family:var(--serif);font-size:40px;line-height:1}
 .panel.Flor .cuenta{color:var(--flor)} .panel.Yeyo .cuenta{color:var(--yeyo)}
@@ -169,6 +169,21 @@ details.det .cuerpo{margin-top:8px;padding:12px 14px;border-radius:12px;backgrou
 .panel ul{list-style:none;margin:0;padding:0}
 .panel li{padding:7px 0;border-top:1px dashed var(--linea);font-size:13.5px}
 .panel li small{color:var(--suave)}
+
+/* Avatares (máscara: toman el color de cada persona) */
+.av{display:inline-block;width:18px;height:18px;flex:none;background:currentColor;-webkit-mask:var(--img) center/contain no-repeat;mask:var(--img) center/contain no-repeat;vertical-align:-4px}
+.av.Flor{--img:url("avatar-flor.png");color:var(--flor)}
+.av.Yeyo{--img:url("avatar-yeyo.png");color:var(--yeyo)}
+.av-caja{display:grid;place-items:center;border-radius:50%;flex:none}
+.av-caja.Flor{background:var(--flor-bg);border:1px solid var(--flor-borde)}
+.av-caja.Yeyo{background:var(--yeyo-bg);border:1px solid var(--yeyo-borde)}
+.personas button{display:inline-flex;align-items:center;gap:7px}
+.personas button[aria-pressed="true"] .av{color:inherit}
+.decide .av,.linea2 .av{width:15px;height:15px;vertical-align:-3px}
+.cifra .quien{display:flex;align-items:center;gap:6px}
+.saludo-av{display:flex;align-items:center;gap:14px;margin-bottom:6px}
+.saludo-av .av-caja{width:52px;height:52px}
+.saludo-av .av{width:34px;height:34px}
 
 /* Avance por área */
 .avances{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
@@ -350,8 +365,8 @@ dialog::backdrop{background:rgba(42,42,42,.35);backdrop-filter:blur(3px)}
     <div class="top">
       <div class="personas" role="group" aria-label="Ver la Oficina como">
         <button type="button" data-p="todo" aria-pressed="true">Todo</button>
-        <button type="button" data-p="Flor" aria-pressed="false">Flor</button>
-        <button type="button" data-p="Yeyo" aria-pressed="false">Yeyo</button>
+        <button type="button" data-p="Flor" aria-pressed="false"><span class="av Flor" aria-hidden="true"></span>Flor</button>
+        <button type="button" data-p="Yeyo" aria-pressed="false"><span class="av Yeyo" aria-hidden="true"></span>Yeyo</button>
       </div>
       <div class="derecha">
         <button class="boton" id="tema" type="button"><svg class="ic" style="width:16px;height:16px"><use href="#i-luna"/></svg><span>Modo oscuro</span></button>
@@ -472,7 +487,9 @@ const claseEstado = e => CERRADOS.includes(e) ? "st-cerrada" : ["EN CURSO","APRO
 const chipEstado = e => `<span class="chip ${claseEstado(e)}">${ic(ICONO_ESTADO[e] || "idea")}${esc(e.toLowerCase())}</span>`;
 const ESTADO_TXT = {"confirmado":["Confirmado","listo"],"en-uso":["En uso, falta confirmar","reloj"],"falta":["Falta definir","idea"]};
 const chip = e => { const [t, i] = ESTADO_TXT[e] || ESTADO_TXT.falta; return `<span class="chip ${e}">${ic(i)}${t}</span>`; };
-const decide = p => `<span class="decide ${esc(p)}">${ic("persona")}Decide: ${esc(p)}</span>`;
+const ES_PERSONA = p => p === "Flor" || p === "Yeyo";
+const av = p => ES_PERSONA(p) ? `<span class="av ${p}" aria-hidden="true"></span>` : ic("persona");
+const decide = p => `<span class="decide ${esc(p)}">${av(p)}Decide: ${esc(p)}</span>`;
 
 function tarjetaTarea(f, num){
   const n = abierta(f) ? diasDesde(f.Fecha) : null;
@@ -480,7 +497,7 @@ function tarjetaTarea(f, num){
   return `<article class="tarea de-${esc(f.Decide)}">
     <div class="linea1">${num ? `<span class="num-dest">${num}</span>` : ""}<span>${esc(AREAS[f["Área"]] || f["Área"])} · ${esc(f.ID)}</span>${chipEstado(f.Estado)}${decide(f.Decide)}</div>
     <h3>${esc(f.Tarea)}</h3>
-    <div class="linea2"><span>${ic("persona")}Lo hace ${esc(f["Lo hace"])}</span>
+    <div class="linea2"><span>${av(f["Lo hace"])}Lo hace ${esc(f["Lo hace"])}</span>
       ${f.Prioridad === "Alta" ? `<span class="alta">${ic("llama")}Prioridad alta</span>` : `<span>Prioridad ${esc((f.Prioridad || "").toLowerCase())}</span>`}
       ${n !== null ? `<span class="${n >= 21 ? "vieja" : ""}">${ic("reloj")}${hace(n)}</span>` : ""}</div>
     ${f["Notas / enlace"] ? `<details class="det"><summary>Ver detalle y referencias</summary><div class="cuerpo">${enlazar(f["Notas / enlace"])}
@@ -502,15 +519,15 @@ function pintarInicio(){
   ab.filter(f => f.Prioridad === "Alta" && (diasDesde(f.Fecha) ?? 0) >= 14).forEach(f => avisos.push(`Prioridad alta abierta ${hace(diasDesde(f.Fecha))}: ${f.Tarea} · ${f.ID}`));
   (D.avisos || []).forEach(t => avisos.unshift(t));
   const panel = p => { const l = espera(p); const porArea = {}; l.forEach(f => (porArea[f["Área"]] ||= []).push(f));
-    return `<article class="panel ${p}"><header><span class="ini">${p[0]}</span><div><h3>${p}</h3><span class="muted" style="font-size:12.5px">${l.length === 1 ? "espera su decisión" : "esperan su decisión"}</span></div><span class="cuenta">${l.length}</span></header>
+    return `<article class="panel ${p}"><header><span class="av-caja ${p}"><span class="av ${p}" aria-hidden="true"></span></span><div><h3>${p}</h3><span class="muted" style="font-size:12.5px">${l.length === 1 ? "espera su decisión" : "esperan su decisión"}</span></div><span class="cuenta">${l.length}</span></header>
       ${Object.keys(AREAS).filter(a => porArea[a]).map(a => `<div class="area"><h4>${ic(ICONO_AREA[a])}${AREAS[a]} · ${porArea[a].length}</h4><ul>${porArea[a].map(f => `<li>${esc(f.Tarea)} <small>· ${esc(f.ID)}</small></li>`).join("")}</ul></div>`).join("") || `<p class="muted" style="margin:14px 0 0">Nada esperando. Al día.</p>`}</article>`; };
   const orden = vista === "Yeyo" ? ["Yeyo","Flor"] : vista === "Flor" ? ["Flor"] : ["Flor","Yeyo"];
   const props = (D.propuestas || []).slice().reverse();
   $("#p-inicio").innerHTML = `
-    <div class="hero"><p class="saludo">${h < 12 ? "Buen día" : h < 20 ? "Buenas tardes" : "Buenas noches"}${quien} · ${esc(fecha)}</p>
+    <div class="hero">${ES_PERSONA(vista) ? `<div class="saludo-av"><span class="av-caja ${vista}"><span class="av ${vista}" aria-hidden="true"></span></span><p class="saludo" style="margin:0">${h < 12 ? "Buen día" : h < 20 ? "Buenas tardes" : "Buenas noches"}${quien} · ${esc(fecha)}</p></div>` : `<p class="saludo">${h < 12 ? "Buen día" : h < 20 ? "Buenas tardes" : "Buenas noches"} · ${esc(fecha)}</p>`}
       <h1>La Oficina de Bartola</h1>
       <p class="resumen">${vista === "todo" ? `Hay <strong>${ab.length} tareas abiertas</strong>: ${espera("Flor").length} esperan a Flor y ${espera("Yeyo").length} esperan a Yeyo.` : `Tenés <strong>${suyas.length} tareas abiertas</strong> donde decidís o hacés vos; ${espera(vista).length} esperan tu decisión.`} Elegí por dónde seguir; el resto queda ordenado por área.</p>
-      <div class="cifras"><div class="cifra"><b>${ab.length}</b><span>abiertas</span></div><div class="cifra flor"><b>${espera("Flor").length}</b><span>esperan a Flor</span></div><div class="cifra yeyo"><b>${espera("Yeyo").length}</b><span>esperan a Yeyo</span></div><div class="cifra ok"><b>${cerradas}</b><span>cerradas</span></div></div>
+      <div class="cifras"><div class="cifra"><b>${ab.length}</b><span>abiertas</span></div><div class="cifra flor"><b>${espera("Flor").length}</b><span class="quien">${av("Flor")}esperan a Flor</span></div><div class="cifra yeyo"><b>${espera("Yeyo").length}</b><span class="quien">${av("Yeyo")}esperan a Yeyo</span></div><div class="cifra ok"><b>${cerradas}</b><span>cerradas</span></div></div>
     </div>
     ${avisos.length ? `<div class="avisos"><h3>${ic("campana")}Para tener en cuenta</h3><ul>${avisos.map(a => `<li>${esc(a)}</li>`).join("")}</ul></div>` : ""}
     <div class="titulo-sec"><div><h2>Para avanzar</h2><p>Las tres más importantes${vista === "todo" ? "" : " tuyas"}: primero prioridad, después las que llevan más tiempo.</p></div><button class="boton" data-ir="pendientes">Ver todas →</button></div>

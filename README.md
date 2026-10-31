@@ -14,6 +14,7 @@ Oficina de Bartola Beauty: estado, pendientes, manual de marca y memoria de MKT 
 - `herramientas/generar.py`: arma `datos.json`.
 - `herramientas/enlaces.json`, `manual.json`, `memoria.json`: contenido fijo que se cifra junto con el TABLERO. Salen de documentos de Drive.
 - `LOGO Color.png`, `LOGO Blanco.png`, `favicon.png`: logos oficiales.
+- `avatar-flor.png`, `avatar-yeyo.png`: avatares (se usan como máscara y toman el color de cada persona).
 
 ## Actualizar los datos
 
