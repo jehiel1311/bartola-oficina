@@ -67,7 +67,7 @@ button,input{font:inherit;color:inherit}
 
 /* Oficina */
 .oficina{max-width:980px;margin:0 auto;padding:22px 18px 64px}
-.cabecera{position:relative;display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px;padding:34px 30px 28px;border-radius:26px;overflow:hidden;
+.cabecera{position:relative;padding:22px 30px 26px;border-radius:26px;overflow:hidden;
   background:
     radial-gradient(120% 140% at 0% 0%, var(--rosa-claro) 0%, transparent 55%),
     radial-gradient(90% 120% at 100% 100%, var(--beige) 0%, transparent 60%),
@@ -77,8 +77,24 @@ button,input{font:inherit;color:inherit}
   background:repeating-linear-gradient(118deg, transparent 0 22px, rgba(255,255,255,.35) 22px 23px, transparent 23px 60px)}
 @media (prefers-color-scheme: dark){.cabecera::after{opacity:.08}}
 .cabecera > *{position:relative;z-index:1}
-.cabecera h1{font-family:var(--serif);font-weight:500;font-size:clamp(30px,6vw,44px);line-height:1.05;margin:0}
-.cabecera p{margin:6px 0 0;color:var(--tinta-suave);font-size:13px}
+.cab-arriba{display:flex;align-items:center;justify-content:space-between;gap:16px}
+.cab-cuerpo{display:grid;grid-template-columns:1fr auto;align-items:center;gap:10px 24px;margin-top:18px}
+.cabecera h1{font-family:var(--serif);font-weight:500;font-size:clamp(38px,7vw,60px);line-height:1;margin:2px 0 14px;letter-spacing:-.015em}
+.saludo{margin:0;font-size:14px;color:var(--tinta-suave)}
+.actualizado{margin:12px 0 0;font-size:12px;color:var(--tinta-suave)}
+.ilustracion{width:min(240px,32vw);height:auto}
+@media (max-width:620px){.cab-cuerpo{grid-template-columns:1fr}.ilustracion{display:none}}
+.logo-caja{display:block}
+.cabecera .logo{width:auto;height:52px;max-width:220px;object-fit:contain}
+.entrada .logo{width:min(240px,75%);height:auto;margin:0 auto 6px}
+/* saltos */
+.saltos{position:sticky;top:max(10px, env(safe-area-inset-top,0px));z-index:20;display:flex;gap:6px;width:max-content;max-width:100%;overflow-x:auto;margin:16px auto 0;padding:6px;border-radius:999px;background:color-mix(in srgb, var(--papel) 80%, transparent);border:1px solid var(--linea);backdrop-filter:blur(10px);box-shadow:0 10px 30px -18px rgba(120,70,72,.45)}
+.saltos a{display:inline-flex;align-items:center;gap:6px;white-space:nowrap;padding:8px 14px;border-radius:999px;color:var(--tinta);text-decoration:none;font-size:13px;font-weight:500}
+.saltos a:hover{background:var(--rosa-claro)}
+.saltos .ic{width:16px;height:16px;color:var(--rosa)}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+#esperan,#t-accesos,#t-tareas{scroll-margin-top:80px}
 .salir{display:inline-flex;align-items:center;gap:6px;background:var(--papel);border:1px solid var(--linea);border-radius:999px;padding:7px 14px;font-size:13px;cursor:pointer;color:var(--tinta-suave)}
 .salir:hover{border-color:var(--rosa);color:var(--tinta)}
 
@@ -111,7 +127,7 @@ button,input{font:inherit;color:inherit}
 
 /* Enlaces rápidos */
 /* Resumen */
-.resumen{margin:22px 4px 0;font-family:var(--serif);font-size:clamp(18px,2.6vw,21px);line-height:1.5;max-width:62ch}
+.resumen{margin:0;font-family:var(--serif);font-size:clamp(17px,2.3vw,20px);line-height:1.5;max-width:56ch;color:var(--tinta)}
 .resumen strong{font-weight:600}
 
 .salir .ic{width:16px;height:16px}
@@ -132,6 +148,10 @@ button,input{font:inherit;color:inherit}
 .accesos > p{margin:0 0 18px;color:var(--tinta-suave);font-size:14px}
 .grupo{margin-top:18px}
 .grupo h3{font-size:13px;font-weight:600;color:var(--tinta-suave);margin:0 0 10px}
+.grupo:nth-child(2) .ic-caja{background:var(--beige)}
+.grupo:nth-child(3) .ic-caja{background:color-mix(in srgb, var(--beige) 50%, var(--rosa-claro))}
+.tarjeta .ic-caja{width:46px;height:46px;border-radius:14px}
+.tarjeta .ic-caja .ic{width:22px;height:22px}
 .tarjetas{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px}
 .tarjeta{display:flex;gap:14px;align-items:flex-start;width:100%;text-align:left;padding:16px;border-radius:18px;background:var(--papel);border:1px solid var(--linea);color:inherit;cursor:pointer;font:inherit;transition:border-color .15s,transform .15s}
 .tarjeta:hover{border-color:var(--rosa)}
@@ -209,6 +229,11 @@ dialog.detalle::backdrop{background:rgba(42,42,42,.35);backdrop-filter:blur(3px)
 .quien .alta,.quien .vieja{color:#B4474C;font-weight:600}
 @media (prefers-color-scheme: dark){.quien .alta,.quien .vieja{color:#F0A2A5}}
 .nota{grid-column:1/-1;font-size:13px;color:var(--tinta-suave);max-width:70ch;overflow-wrap:anywhere}
+details.nota summary{cursor:pointer;width:max-content;font-size:12.5px;color:var(--tinta-suave);list-style:none;display:inline-flex;align-items:center;gap:4px;padding:2px 0}
+details.nota summary::-webkit-details-marker{display:none}
+details.nota summary::after{content:"+";font-weight:600;color:var(--rosa)}
+details.nota[open] summary::after{content:"–"}
+details.nota p{margin:6px 0 2px;padding:10px 12px;border-radius:12px;background:var(--fondo)}
 .nota a{color:inherit}
 details.cerradas{margin-top:8px}
 details.cerradas summary{cursor:pointer;font-size:13px;color:var(--tinta-suave);padding:12px 0;list-style-position:inside}
@@ -264,7 +289,10 @@ details.cerradas .tarea{opacity:.7}
 
 <main class="entrada" id="entrada">
   <form id="form" autocomplete="off">
-    <img class="logo oscuro-invertir" src="logo.png" alt="Bartola Beauty" width="440" height="220" onerror="this.remove();document.getElementById('marca').hidden=false">
+    <picture class="logo-caja">
+      <source srcset="LOGO%20Blanco.png" media="(prefers-color-scheme: dark)">
+      <img class="logo" src="LOGO%20Color.png" alt="Bartola Beauty" onerror="this.closest('picture').remove();document.getElementById('marca').hidden=false">
+    </picture>
     <h1 class="sello" id="marca" hidden aria-label="Bartola Beauty"><img src="favicon.png" alt=""><span class="nombre">Bartola</span><span class="beauty">beauty</span></h1>
     <p class="marca-sub">Oficina de Flor y Yeyo</p>
     <div class="campo-ic"><svg class="ic" aria-hidden="true"><use href="#i-candado"/></svg>
@@ -277,15 +305,39 @@ details.cerradas .tarea{opacity:.7}
 
 <div class="oficina" id="oficina" hidden>
   <header class="cabecera">
-    <div>
-      <img class="logo oscuro-invertir" src="logo.png" alt="Bartola Beauty" width="300" height="150" onerror="this.remove();document.getElementById('sello-cab').hidden=false">
+    <div class="cab-arriba">
+      <picture class="logo-caja">
+        <source srcset="LOGO%20Blanco.png" media="(prefers-color-scheme: dark)">
+        <img class="logo" src="LOGO%20Color.png" alt="Bartola Beauty" onerror="this.closest('picture').remove();document.getElementById('sello-cab').hidden=false">
+      </picture>
       <div class="sello" id="sello-cab" hidden aria-label="Bartola Beauty"><img src="favicon.png" alt=""><span class="nombre">Bartola</span><span class="beauty">beauty</span></div>
-      <h1 style="margin-top:14px">Oficina</h1>
-      <p id="actualizado"></p>
+      <button class="salir" id="salir" type="button"><svg class="ic" aria-hidden="true"><use href="#i-salir"/></svg> Salir</button>
     </div>
-    <button class="salir" id="salir" type="button"><svg class="ic" aria-hidden="true"><use href="#i-salir"/></svg> Salir</button>
+    <div class="cab-cuerpo">
+      <div>
+        <p class="saludo" id="saludo"></p>
+        <h1>Oficina</h1>
+        <p class="resumen" id="resumen"></p>
+        <p class="actualizado" id="actualizado"></p>
+      </div>
+      <svg class="ilustracion" viewBox="0 0 240 200" aria-hidden="true">
+        <defs><linearGradient id="g-frasco" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="var(--rosa-claro)"/><stop offset="1" stop-color="var(--papel)"/></linearGradient></defs>
+        <g fill="none" stroke="var(--tinta)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" opacity=".78">
+          <path d="M150 172c-30 0-46-4-46-26v-48c0-12 8-18 20-20h52c12 2 20 8 20 20v48c0 22-16 26-46 26z" fill="url(#g-frasco)"/>
+          <path d="M132 78v-12h36v12"/><rect x="128" y="42" width="44" height="24" rx="6" fill="var(--papel)"/>
+          <path d="M114 128c20 6 52 6 72 0" stroke="var(--rosa)"/>
+          <text x="150" y="122" text-anchor="middle" font-family="Playfair Display, Georgia, serif" font-size="15" fill="var(--tinta)" stroke="none">BB</text>
+          <path d="M62 170c0-30 10-52 26-66M88 104c-14 2-22-6-24-16 12-2 22 4 24 16zM76 136c-12-2-20-10-20-20 12 0 20 8 20 20zM80 120c10-8 22-8 30-2-8 8-20 8-30 2z" stroke="var(--rosa)"/>
+          <circle cx="198" cy="40" r="2.2" fill="var(--rosa)" stroke="none"/><circle cx="212" cy="58" r="1.4" fill="var(--rosa)" stroke="none"/><circle cx="188" cy="24" r="1.2" fill="var(--rosa)" stroke="none"/>
+        </g>
+      </svg>
+    </div>
   </header>
-  <p class="resumen" id="resumen"></p>
+  <nav class="saltos" aria-label="Secciones">
+    <a href="#esperan"><svg class="ic" aria-hidden="true"><use href="#i-persona"/></svg>Qué espera</a>
+    <a href="#t-accesos"><svg class="ic" aria-hidden="true"><use href="#i-brujula"/></svg>Dónde está cada cosa</a>
+    <a href="#t-tareas"><svg class="ic" aria-hidden="true"><use href="#i-tareas"/></svg>Tareas</a>
+  </nav>
   <div class="cifras" id="cifras"></div>
 
   <section class="avisos" id="avisos" hidden aria-live="polite"></section>
@@ -313,7 +365,7 @@ details.cerradas .tarea{opacity:.7}
     </details>
   </section>
 
-  <h2 class="seccion-titulo" style="margin-top:44px"><span class="ic-caja"><svg class="ic" aria-hidden="true"><use href="#i-tareas"/></svg></span>Tareas</h2>
+  <h2 class="seccion-titulo" id="t-tareas" style="margin-top:44px"><span class="ic-caja"><svg class="ic" aria-hidden="true"><use href="#i-tareas"/></svg></span>Tareas</h2>
   <div class="filtro" role="group" aria-label="Mostrar tareas de" style="margin-top:12px">
     <button type="button" data-f="todo" aria-pressed="true"><svg class="ic" aria-hidden="true"><use href="#i-todo"/></svg>Todo</button>
     <button type="button" data-f="Flor" aria-pressed="false"><svg class="ic" aria-hidden="true"><use href="#i-persona"/></svg>Flor</button>
@@ -384,7 +436,10 @@ async function entrar(clave, recordar){
     const d = await abrir(clave);
     if(recordar) guardar(clave);
     filas = d.filas || []; enlaces = d.enlaces || [];
-    $("#actualizado").textContent = "Actualizado el " + d.actualizado;
+    $("#actualizado").textContent = "Datos del TABLERO al " + d.actualizado;
+    const hAR = new Date(Date.now() - 3*3600000).getUTCHours();
+    const fecha = new Date().toLocaleDateString("es-AR", {weekday:"long", day:"numeric", month:"long", timeZone:"America/Argentina/Buenos_Aires"});
+    $("#saludo").textContent = (hAR < 12 ? "Buen día" : hAR < 20 ? "Buenas tardes" : "Buenas noches") + " · " + fecha;
     $("#entrada").hidden = true; $("#oficina").hidden = false;
     pintar();
   }catch(e){
@@ -421,7 +476,7 @@ function tarea(f){
     <h3><span class="id">${esc(f.ID)}</span>${esc(f.Tarea)}</h3>
     <span class="estado" data-e="${esc(f.Estado)}">${ic(ICONO_ESTADO[f.Estado] || "idea")}${esc(f.Estado)}</span>
     <div class="quien"><span>${ic("persona")}Decide ${esc(f.Decide)}, lo hace ${esc(f["Lo hace"])}</span>${alta}${diasTxt(f)}</div>
-    ${f["Notas / enlace"] ? `<div class="nota">${enlazar(f["Notas / enlace"])}</div>` : ""}
+    ${f["Notas / enlace"] ? `<details class="nota"><summary>Ver detalle</summary><p>${enlazar(f["Notas / enlace"])}</p></details>` : ""}
   </article>`;
 }
 
