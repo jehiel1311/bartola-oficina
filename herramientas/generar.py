@@ -72,6 +72,8 @@ def main():
     enlaces = json.load(open(ruta_enlaces, encoding="utf-8")) if os.path.exists(ruta_enlaces) else []
     datos = {
         "actualizado": datetime.now(ar).strftime("%d/%m/%Y %H:%M"),
+        "datos_actualizados_en": datetime.now(ar).isoformat(timespec="minutes"),
+        "actualizado_por": os.environ.get("OFICINA_ACTUALIZA", "Claudia"),
         "filas": filas,
         "enlaces": enlaces,
         "avisos": avisos,
