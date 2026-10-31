@@ -95,6 +95,16 @@ button,input{font:inherit;color:inherit}
 html{scroll-behavior:smooth}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 #esperan,#t-accesos,#t-tareas,#t-manual{scroll-margin-top:80px}
+/* Propuestas */
+.propuestas{margin-top:22px;padding:22px 24px;border-radius:24px;border:1px dashed color-mix(in srgb, var(--rosa) 60%, var(--linea));background:color-mix(in srgb, var(--papel) 75%, transparent)}
+.prop-cab{display:flex;gap:14px;align-items:flex-start}
+.prop-cab h2{font-family:var(--serif);font-weight:500;font-size:21px;margin:0}
+.prop-cab p{margin:4px 0 0;font-size:13px;color:var(--tinta-suave);max-width:64ch}
+.propuestas ol{list-style:none;margin:16px 0 0;padding:0;display:grid;gap:8px;counter-reset:prop}
+.propuestas li{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:start;padding:12px 14px;border-radius:14px;background:var(--papel);border:1px solid var(--linea);font-size:14px}
+.propuestas li b{display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--rosa-claro);font-family:var(--serif);font-weight:500}
+.propuestas li small{display:block;color:var(--tinta-suave);font-size:12px;margin-top:2px}
+
 /* Manual de marca */
 .manual{margin-top:44px}
 .manual > p{margin:4px 0 18px;color:var(--tinta-suave);font-size:14px}
@@ -384,6 +394,15 @@ details.cerradas .tarea{opacity:.7}
 
   <section class="esperan" id="esperan" aria-label="Lo que espera la decisión de cada uno"></section>
 
+  <section class="propuestas" id="propuestas" hidden aria-labelledby="t-propuestas">
+    <div class="prop-cab">
+      <span class="ic-caja"><svg class="ic" aria-hidden="true"><use href="#i-brillo"/></svg></span>
+      <div><h2 id="t-propuestas">Propuestas de Claudia para Yeyo</h2>
+      <p>Ideas para ver mejor las cosas. Son sugerencias, no órdenes: si te gusta una, decíselo a Claudia en el chat por su número.</p></div>
+    </div>
+    <ol id="prop-lista"></ol>
+  </section>
+
   <section class="accesos" aria-labelledby="t-accesos">
     <h2 id="t-accesos"><span class="ic-caja"><svg class="ic" aria-hidden="true"><use href="#i-brujula"/></svg></span>Dónde está cada cosa</h2>
     <p>Tocá un acceso y te cuento qué hay antes de abrirlo.</p>
@@ -448,7 +467,7 @@ const ICONO_AREA = {WEB:"tienda", OFICINA:"oficina", MKT:"megafono"};
 const ICONO_ESTADO = {"IDEA":"idea","PARA REVISAR":"ojo","PROPUESTA":"lapiz","APROBADO":"check","EN CURSO":"play","PROBADO":"check","POR VERIFICAR":"lupa","PUBLICADO":"listo","HECHO":"listo","MEDIDO":"listo","DESCARTADO":"cerrar"};
 const ic = n => `<svg class="ic" aria-hidden="true"><use href="#i-${n}"/></svg>`;
 const LLAVE_LOCAL = "bartola-oficina-clave";
-let filas = [], enlaces = [], manual = null, avisosExtra = [], filtro = "todo";
+let filas = [], enlaces = [], manual = null, avisosExtra = [], propuestas = [], filtro = "todo";
 const DIA = 86400000;
 function hoyAR(){ const a = new Date(Date.now() - 3*3600000); return Date.UTC(a.getUTCFullYear(), a.getUTCMonth(), a.getUTCDate()); }
 function aFecha(t){ const m = /(\d{1,2})\/(\d{1,2})\/(\d{4})/.exec(t || ""); return m ? Date.UTC(+m[3], +m[2]-1, +m[1]) : null; }
@@ -481,7 +500,7 @@ async function entrar(clave, recordar){
   try{
     const d = await abrir(clave);
     if(recordar) guardar(clave);
-    filas = d.filas || []; enlaces = d.enlaces || []; manual = d.manual || null; avisosExtra = d.avisos || [];
+    filas = d.filas || []; enlaces = d.enlaces || []; manual = d.manual || null; avisosExtra = d.avisos || []; propuestas = d.propuestas || [];
     $("#actualizado").textContent = "Datos del TABLERO al " + d.actualizado;
     const hAR = new Date(Date.now() - 3*3600000).getUTCHours();
     const fecha = new Date().toLocaleDateString("es-AR", {weekday:"long", day:"numeric", month:"long", timeZone:"America/Argentina/Buenos_Aires"});
@@ -576,6 +595,12 @@ function pintarManual(){
   $("#manual-cuerpo").innerHTML = caja + `<div class="m-grilla">${colores}${tipos}${bloques}</div>`;
 }
 
+function pintarPropuestas(){
+  const sec = $("#propuestas");
+  sec.hidden = !propuestas.length;
+  $("#prop-lista").innerHTML = propuestas.slice().reverse().map(p => `<li><b>${p.n}</b><div>${esc(p.texto)}<small>Propuesta del ${esc(p.fecha)}</small></div></li>`).join("");
+}
+
 function pintarResumen(){
   const abiertas = filas.filter(f => !CERRADOS.includes(f.Estado));
   const esperan = p => filas.filter(f => f.Decide === p && ESPERAN.includes(f.Estado)).length;
@@ -624,6 +649,7 @@ function pintar(){
   pintarResumen();
   pintarEnlaces();
   pintarManual();
+  pintarPropuestas();
   pintarAvisos();
   pintarEsperan();
   const vista = filas.filter(f => filtro === "todo" || f.Decide === filtro || f["Lo hace"] === filtro);
