@@ -29,9 +29,12 @@ def main():
             if (fila.get("ID") or "").strip()
         ]
     ar = timezone(timedelta(hours=-3))
+    ruta_enlaces = os.path.join(os.path.dirname(os.path.abspath(__file__)), "enlaces.json")
+    enlaces = json.load(open(ruta_enlaces, encoding="utf-8")) if os.path.exists(ruta_enlaces) else []
     datos = {
         "actualizado": datetime.now(ar).strftime("%d/%m/%Y %H:%M"),
         "filas": filas,
+        "enlaces": enlaces,
     }
     sal, iv = os.urandom(16), os.urandom(12)
     kdf = PBKDF2HMAC(algorithm=hashes.SHA256(), length=32, salt=sal, iterations=ITER)

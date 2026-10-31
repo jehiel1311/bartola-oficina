@@ -5,7 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
 <title>Oficina · Bartola Beauty</title>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌸</text></svg>">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
@@ -36,6 +37,7 @@ button,input{font:inherit;color:inherit}
 /* Entrada */
 .entrada{min-height:100vh;min-height:100dvh;display:grid;place-items:center;padding:24px}
 .entrada form{width:min(340px,100%);text-align:center}
+.entrada .marca-sub{margin-top:14px}
 .marca{font-family:var(--serif);font-weight:500;font-size:clamp(40px,10vw,56px);line-height:1;margin:0;letter-spacing:-.01em}
 .marca-sub{margin:10px 0 36px;color:var(--tinta-suave);font-size:14px}
 .campo{display:block;width:100%;padding:14px 16px;border:1px solid var(--linea);border-radius:999px;background:var(--papel);text-align:center;font-size:16px}
@@ -69,6 +71,24 @@ button,input{font:inherit;color:inherit}
 .persona li small{color:var(--tinta-suave)}
 .persona .nada{color:var(--tinta-suave);font-style:italic;font-family:var(--serif);font-size:16px;margin-top:16px}
 
+/* Logo */
+.logo{display:block;height:auto;max-width:100%}
+.entrada .logo{width:min(220px,70%);margin:0 auto 8px}
+.cabecera .logo{width:150px;margin-bottom:10px}
+@media (prefers-color-scheme: dark){.logo.oscuro-invertir{filter:invert(1) hue-rotate(180deg)}}
+
+/* Enlaces rápidos */
+.enlaces{display:flex;flex-wrap:wrap;gap:6px 18px;margin:16px 0 0;padding:0;list-style:none;font-size:13px}
+.enlaces a{color:var(--tinta-suave);text-decoration:none;border-bottom:1px solid var(--rosa-claro);padding-bottom:1px}
+.enlaces a:hover{color:var(--tinta);border-color:var(--rosa)}
+
+/* Avisos */
+.avisos{margin:28px 0 0;padding:16px 20px;border-left:3px solid var(--rosa);background:var(--rosa-claro);border-radius:0 14px 14px 0}
+.avisos h2{font-family:var(--serif);font-weight:500;font-size:18px;margin:0 0 6px}
+.avisos ul{margin:0;padding-left:18px}
+.avisos li{font-size:14px;padding:3px 0}
+.avisos small{color:var(--tinta-suave)}
+
 /* Filtro */
 .filtro{display:flex;flex-wrap:wrap;gap:8px;margin:40px 0 6px}
 .filtro button{border:1px solid var(--linea);background:transparent;border-radius:999px;padding:7px 16px;font-size:13px;cursor:pointer;color:var(--tinta-suave)}
@@ -85,8 +105,8 @@ button,input{font:inherit;color:inherit}
 .estado[data-e="PARA REVISAR"],.estado[data-e="PROPUESTA"],.estado[data-e="IDEA"]{background:var(--rosa-claro)}
 .estado[data-e="EN CURSO"],.estado[data-e="APROBADO"]{background:var(--tinta);color:var(--fondo)}
 .quien{font-size:13px;color:var(--tinta-suave)}
-.quien .alta{color:#B4474C;font-weight:600}
-@media (prefers-color-scheme: dark){.quien .alta{color:#F0A2A5}}
+.quien .alta,.quien .vieja{color:#B4474C;font-weight:600}
+@media (prefers-color-scheme: dark){.quien .alta,.quien .vieja{color:#F0A2A5}}
 .nota{grid-column:1/-1;font-size:13px;color:var(--tinta-suave);max-width:70ch;overflow-wrap:anywhere}
 .nota a{color:inherit}
 details.cerradas{margin-top:8px}
@@ -107,7 +127,8 @@ details.cerradas .tarea{opacity:.7}
 
 <main class="entrada" id="entrada">
   <form id="form" autocomplete="off">
-    <h1 class="marca">Bartola</h1>
+    <img class="logo oscuro-invertir" src="logo.png" alt="Bartola Beauty" width="440" height="220" onerror="this.remove();document.getElementById('marca').hidden=false">
+    <h1 class="marca" id="marca" hidden>Bartola</h1>
     <p class="marca-sub">Oficina de Flor y Yeyo</p>
     <input class="campo" id="clave" type="password" placeholder="Contraseña" aria-label="Contraseña" required autofocus>
     <label class="recordar"><input type="checkbox" id="recordar"> Recordarme en este dispositivo</label>
@@ -119,11 +140,15 @@ details.cerradas .tarea{opacity:.7}
 <div class="oficina" id="oficina" hidden>
   <header class="cabecera">
     <div>
-      <h1>Oficina de Bartola</h1>
+      <img class="logo oscuro-invertir" src="logo.png" alt="Bartola Beauty" width="300" height="150" onerror="this.remove()">
+      <h1>Oficina</h1>
       <p id="actualizado"></p>
     </div>
     <button class="salir" id="salir" type="button">Salir</button>
   </header>
+  <ul class="enlaces" id="enlaces" aria-label="Enlaces rápidos"></ul>
+
+  <section class="avisos" id="avisos" hidden aria-live="polite"></section>
 
   <section class="esperan" id="esperan" aria-label="Lo que espera la decisión de cada uno"></section>
 
@@ -143,7 +168,13 @@ const CERRADOS = ["HECHO","PUBLICADO","MEDIDO","DESCARTADO"];
 const ESPERAN = ["PARA REVISAR","PROPUESTA","IDEA","POR VERIFICAR"];
 const AREAS = {WEB:"Tienda web", OFICINA:"Oficina", MKT:"Marketing"};
 const LLAVE_LOCAL = "bartola-oficina-clave";
-let filas = [], filtro = "todo";
+let filas = [], enlaces = [], filtro = "todo";
+const DIA = 86400000;
+function hoyAR(){ const a = new Date(Date.now() - 3*3600000); return Date.UTC(a.getUTCFullYear(), a.getUTCMonth(), a.getUTCDate()); }
+function aFecha(t){ const m = /(\d{1,2})\/(\d{1,2})\/(\d{4})/.exec(t || ""); return m ? Date.UTC(+m[3], +m[2]-1, +m[1]) : null; }
+function diasDesde(f){ const t = aFecha(f); return t === null ? null : Math.round((hoyAR() - t) / DIA); }
+function vencimiento(f){ const m = /vence[^0-9]{0,4}(\d{1,2}\/\d{1,2}\/\d{4})/i.exec((f.Tarea || "") + " " + (f["Notas / enlace"] || "")); return m ? Math.round((aFecha(m[1]) - hoyAR()) / DIA) : null; }
+const hace = n => n === null ? "" : n <= 0 ? "desde hoy" : n === 1 ? "hace 1 día" : `hace ${n} días`;
 
 const $ = s => document.querySelector(s);
 const b64 = s => Uint8Array.from(atob(s), c => c.charCodeAt(0));
@@ -170,7 +201,7 @@ async function entrar(clave, recordar){
   try{
     const d = await abrir(clave);
     if(recordar) guardar(clave);
-    filas = d.filas || [];
+    filas = d.filas || []; enlaces = d.enlaces || [];
     $("#actualizado").textContent = "Actualizado el " + d.actualizado;
     $("#entrada").hidden = true; $("#oficina").hidden = false;
     pintar();
@@ -204,12 +235,41 @@ function tarea(f){
   return `<article class="tarea">
     <h3><span class="id">${esc(f.ID)}</span>${esc(f.Tarea)}</h3>
     <span class="estado" data-e="${esc(f.Estado)}">${esc(f.Estado)}</span>
-    <div class="quien">Decide ${esc(f.Decide)} · Lo hace ${esc(f["Lo hace"])}${alta}</div>
+    <div class="quien">Decide ${esc(f.Decide)} · Lo hace ${esc(f["Lo hace"])}${alta}${diasTxt(f)}</div>
     ${f["Notas / enlace"] ? `<div class="nota">${enlazar(f["Notas / enlace"])}</div>` : ""}
   </article>`;
 }
 
+function diasTxt(f){
+  if(CERRADOS.includes(f.Estado)) return "";
+  const n = diasDesde(f.Fecha); if(n === null) return "";
+  return n >= 21 ? ` · <span class="vieja">${hace(n)}</span>` : ` · ${hace(n)}`;
+}
+
+function pintarEnlaces(){
+  $("#enlaces").innerHTML = enlaces.map(e => `<li><a href="${esc(e.url)}" target="_blank" rel="noopener">${esc(e.nombre)}</a></li>`).join("");
+}
+
+function pintarAvisos(){
+  const abiertas = filas.filter(f => !CERRADOS.includes(f.Estado));
+  const avisos = [];
+  abiertas.forEach(f => {
+    const v = vencimiento(f);
+    if(v !== null && v <= 30) avisos.push({orden: v, txt: v < 0 ? `Venció hace ${-v} días: ${esc(f.Tarea)}` : v === 0 ? `Vence hoy: ${esc(f.Tarea)}` : `Vence en ${v} ${v === 1 ? "día" : "días"}: ${esc(f.Tarea)}`, id: f.ID});
+  });
+  abiertas.filter(f => f.Prioridad === "Alta").forEach(f => {
+    const n = diasDesde(f.Fecha);
+    if(n !== null && n >= 14) avisos.push({orden: 100 - n/1000, txt: `Prioridad alta abierta ${hace(n)}: ${esc(f.Tarea)}`, id: f.ID});
+  });
+  avisos.sort((a,b) => a.orden - b.orden);
+  const caja = $("#avisos");
+  caja.hidden = !avisos.length;
+  caja.innerHTML = avisos.length ? `<h2>Para tener en cuenta</h2><ul>${avisos.map(a => `<li>${a.txt} <small>· ${esc(a.id)}</small></li>`).join("")}</ul>` : "";
+}
+
 function pintar(){
+  pintarEnlaces();
+  pintarAvisos();
   pintarEsperan();
   const vista = filas.filter(f => filtro === "todo" || f.Decide === filtro || f["Lo hace"] === filtro);
   const grupos = {};
