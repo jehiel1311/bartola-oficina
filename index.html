@@ -90,9 +90,31 @@ button,input{font:inherit;color:inherit}
 @media (prefers-color-scheme: dark){.logo.oscuro-invertir{filter:invert(1) hue-rotate(180deg)}}
 
 /* Enlaces rápidos */
-.enlaces{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 0;padding:0;list-style:none;font-size:13px}
-.enlaces a{display:inline-block;color:var(--tinta);text-decoration:none;padding:7px 14px;border-radius:999px;background:var(--papel);border:1px solid var(--linea)}
-.enlaces a:hover{border-color:var(--rosa);background:var(--rosa-claro)}
+/* Resumen */
+.resumen{margin:22px 4px 0;font-family:var(--serif);font-size:clamp(18px,2.6vw,21px);line-height:1.5;max-width:62ch}
+.resumen strong{font-weight:600}
+
+/* Dónde está cada cosa */
+.accesos{margin-top:40px}
+.accesos > h2,.seccion-titulo{font-family:var(--serif);font-weight:500;font-size:24px;margin:0 0 4px}
+.accesos > p{margin:0 0 18px;color:var(--tinta-suave);font-size:14px}
+.grupo{margin-top:18px}
+.grupo h3{font-size:13px;font-weight:600;color:var(--tinta-suave);margin:0 0 10px}
+.tarjetas{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px}
+.tarjeta{display:block;padding:16px 18px;border-radius:16px;background:var(--papel);border:1px solid var(--linea);color:inherit;text-decoration:none;transition:border-color .15s,background .15s}
+.tarjeta:hover{border-color:var(--rosa)}
+.tarjeta strong{display:block;font-size:15px;margin-bottom:4px}
+.tarjeta strong::after{content:" ↗";color:var(--rosa);font-weight:400}
+.tarjeta span{display:block;font-size:13px;color:var(--tinta-suave);line-height:1.5}
+
+/* Cómo leer la Oficina */
+.guia{margin-top:14px;border:1px solid var(--linea);border-radius:16px;background:var(--papel);padding:0 18px}
+.guia summary{cursor:pointer;padding:14px 0;font-weight:600;font-size:14px}
+.guia dl{margin:0 0 16px;display:grid;grid-template-columns:auto 1fr;gap:6px 14px;font-size:13px}
+.guia dt{font-weight:600}
+.guia dd{margin:0;color:var(--tinta-suave)}
+.guia p{font-size:13px;color:var(--tinta-suave);margin:0 0 12px}
+.area-resumen{margin:0 0 6px;font-size:13px;color:var(--tinta-suave)}
 
 /* Avisos */
 .avisos{margin:28px 0 0;padding:16px 20px;border-left:3px solid var(--rosa);background:var(--rosa-claro);border-radius:0 14px 14px 0}
@@ -112,7 +134,7 @@ button,input{font:inherit;color:inherit}
 .area > h2{font-family:var(--serif);font-weight:500;font-size:22px;margin:0 0 4px;display:flex;align-items:baseline;gap:10px}
 .area > h2 small{font-family:var(--sans);font-size:13px;color:var(--tinta-suave);font-weight:400}
 .tarea{display:grid;grid-template-columns:1fr auto;gap:4px 18px;padding:16px 0;border-top:1px solid var(--linea)}
-.area > h2 + .tarea{border-top:0}
+.area-resumen + .tarea{border-top:0}
 .tarea h3{margin:0;font-size:15px;font-weight:600;line-height:1.4}
 .tarea .id{color:var(--tinta-suave);font-weight:500;margin-right:6px}
 .estado{grid-row:1/3;grid-column:2;align-self:start;white-space:nowrap;font-size:11.5px;font-weight:600;padding:4px 11px 4px 9px;border-radius:999px;background:var(--beige);display:inline-flex;align-items:center;gap:6px;text-transform:lowercase}
@@ -166,13 +188,35 @@ details.cerradas .tarea{opacity:.7}
     </div>
     <button class="salir" id="salir" type="button">Salir</button>
   </header>
-  <ul class="enlaces" id="enlaces" aria-label="Enlaces rápidos"></ul>
+  <p class="resumen" id="resumen"></p>
 
   <section class="avisos" id="avisos" hidden aria-live="polite"></section>
 
   <section class="esperan" id="esperan" aria-label="Lo que espera la decisión de cada uno"></section>
 
-  <div class="filtro" role="group" aria-label="Mostrar tareas de">
+  <section class="accesos" aria-labelledby="t-accesos">
+    <h2 id="t-accesos">Dónde está cada cosa</h2>
+    <p>Un toque y entrás. Cada acceso dice qué vas a encontrar.</p>
+    <div id="accesos"></div>
+    <details class="guia">
+      <summary>Cómo leer esta Oficina</summary>
+      <p>Todo sale del TABLERO de Drive. Arriba ves lo que espera la decisión de cada uno; abajo, todas las tareas por área.</p>
+      <dl>
+        <dt>Idea</dt><dd>Algo propuesto, todavía sin decidir.</dd>
+        <dt>Para revisar</dt><dd>Alguien tiene que mirarlo y decir sí, no o cambios.</dd>
+        <dt>Propuesta</dt><dd>Está pensado cómo hacerlo; falta el visto bueno.</dd>
+        <dt>Aprobado</dt><dd>Se decidió hacerlo; falta empezar.</dd>
+        <dt>En curso</dt><dd>Se está haciendo.</dd>
+        <dt>Por verificar</dt><dd>Se hizo; falta comprobar que quedó bien.</dd>
+        <dt>Publicado / Hecho</dt><dd>Terminado. Queda en "cerradas", plegado.</dd>
+        <dt>Decide / Lo hace</dt><dd>Quién da el OK y quién lo ejecuta (puede ser una IA: Claudia o Chaty).</dd>
+        <dt>Hace N días</dt><dd>Cuánto lleva abierta. Desde 21 días se marca en rosa fuerte.</dd>
+      </dl>
+    </details>
+  </section>
+
+  <h2 class="seccion-titulo" style="margin-top:44px">Tareas</h2>
+  <div class="filtro" role="group" aria-label="Mostrar tareas de" style="margin-top:12px">
     <button type="button" data-f="todo" aria-pressed="true">Todo</button>
     <button type="button" data-f="Flor" aria-pressed="false">Flor</button>
     <button type="button" data-f="Yeyo" aria-pressed="false">Yeyo</button>
@@ -267,7 +311,35 @@ function diasTxt(f){
 }
 
 function pintarEnlaces(){
-  $("#enlaces").innerHTML = enlaces.map(e => `<li><a href="${esc(e.url)}" target="_blank" rel="noopener">${esc(e.nombre)}</a></li>`).join("");
+  const grupos = {};
+  enlaces.forEach(e => (grupos[e.grupo || "Accesos"] ||= []).push(e));
+  $("#accesos").innerHTML = Object.entries(grupos).map(([g, lista]) => `<div class="grupo"><h3>${esc(g)}</h3><div class="tarjetas">${
+    lista.map(e => `<a class="tarjeta" href="${esc(e.url)}" target="_blank" rel="noopener"><strong>${esc(e.nombre)}</strong>${e.descripcion ? `<span>${esc(e.descripcion)}</span>` : ""}</a>`).join("")
+  }</div></div>`).join("");
+}
+
+function pintarResumen(){
+  const abiertas = filas.filter(f => !CERRADOS.includes(f.Estado));
+  const esperan = p => filas.filter(f => f.Decide === p && ESPERAN.includes(f.Estado)).length;
+  const altas = abiertas.filter(f => f.Prioridad === "Alta");
+  const cerradas = filas.length - abiertas.length;
+  const plural = (n, a, b) => `${n} ${n === 1 ? a : b}`;
+  let t = `Hay <strong>${plural(abiertas.length, "tarea abierta", "tareas abiertas")}</strong>: ${plural(esperan("Flor"), "espera", "esperan")} a Flor y ${plural(esperan("Yeyo"), "espera", "esperan")} a Yeyo.`;
+  if(altas.length) t += ` Lo más importante: ${altas.slice(0,2).map(f => esc(f.Tarea)).join(" y ")}.`;
+  if(cerradas) t += ` Ya se cerraron ${cerradas}.`;
+  $("#resumen").innerHTML = t;
+}
+
+function resumenArea(lista){
+  const abiertas = lista.filter(f => !CERRADOS.includes(f.Estado));
+  if(!abiertas.length) return "Todo cerrado en esta área.";
+  const quien = [...new Set(abiertas.map(f => f.Decide))];
+  const altas = abiertas.filter(f => f.Prioridad === "Alta").length;
+  const viejas = abiertas.filter(f => (diasDesde(f.Fecha) ?? 0) >= 21).length;
+  const partes = [`Decide ${quien.join(" y ")}`];
+  if(altas) partes.push(`${altas} de prioridad alta`);
+  if(viejas) partes.push(`${viejas} ${viejas === 1 ? "lleva" : "llevan"} más de 3 semanas`);
+  return partes.join(" · ") + ".";
 }
 
 function pintarAvisos(){
@@ -288,6 +360,7 @@ function pintarAvisos(){
 }
 
 function pintar(){
+  pintarResumen();
   pintarEnlaces();
   pintarAvisos();
   pintarEsperan();
@@ -300,6 +373,7 @@ function pintar(){
     const cerradas = grupos[a].filter(f => CERRADOS.includes(f.Estado));
     return `<section class="area">
       <h2>${esc(AREAS[a] || a)} <small>${abiertas.length} abiertas</small></h2>
+      <p class="area-resumen">${resumenArea(grupos[a])}</p>
       ${abiertas.map(tarea).join("")}
       ${cerradas.length ? `<details class="cerradas"><summary>${cerradas.length} cerradas</summary>${cerradas.map(tarea).join("")}</details>` : ""}
     </section>`;

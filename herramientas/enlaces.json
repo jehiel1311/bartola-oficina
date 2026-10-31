@@ -1,7 +1,20 @@
 [
-  {"nombre": "Tienda", "url": "https://bartolabeauty.com"},
-  {"nombre": "Drive de Bartola", "url": "https://drive.google.com/drive/folders/1NaGFVEMJ4TmmiIJLHDoCgcBag16j-i6u"},
-  {"nombre": "Marketing", "url": "https://drive.google.com/drive/folders/1TFXuaSG9Qinoi5vKsrSoiWTbsgqbNZ4S"},
-  {"nombre": "Recursos de marca", "url": "https://drive.google.com/drive/folders/1mtuZE4Dwgw_XlcBEn9Yamj2YXUhK0l67"},
-  {"nombre": "Carruseles aprobados", "url": "https://www.canva.com/folder/FAHZY5u4MR8"}
+  {"grupo": "Tienda y marca", "nombre": "Tienda online", "url": "https://bartolabeauty.com",
+   "descripcion": "La tienda tal como la ve una clienta: productos, precios y fotos."},
+  {"grupo": "Tienda y marca", "nombre": "Identidad visual", "url": "https://docs.google.com/document/d/1cJ-byIWVmN07NtDCf77OlFyIDX-W2ry3LGcW4FlzrvQ/edit",
+   "descripcion": "Los colores de la marca (blanco roto, rosas, beige y negro suave) y las tipografías Playfair Display, Montserrat y Brittany."},
+  {"grupo": "Para diseñar", "nombre": "Carruseles aprobados", "url": "https://www.canva.com/folder/FAHZY5u4MR8",
+   "descripcion": "En Canva: los carruseles que Flor ya aprobó. Se miran antes de armar uno nuevo, para no empezar de cero."},
+  {"grupo": "Para diseñar", "nombre": "Referencia Educacional", "url": "https://www.canva.com/d/w493jyJ_QvFpgUd",
+   "descripcion": "Modelo del estilo Educacional (Body Splash vs. Eau de Parfum): portada que despierta interés, situación cotidiana, explicación útil y cierre sin vender."},
+  {"grupo": "Para diseñar", "nombre": "Referencia Venta", "url": "https://www.canva.com/d/4bYYayWc52AOdpZ",
+   "descripcion": "Modelo del estilo Venta (Onyx Tiaré): descubrimiento, presentación, notas, carácter, cuándo usarlo y cierre de marca."},
+  {"grupo": "Para diseñar", "nombre": "Recursos de marca", "url": "https://drive.google.com/drive/folders/1mtuZE4Dwgw_XlcBEn9Yamj2YXUhK0l67",
+   "descripcion": "En Drive: fondos aprobados, fotos de productos, productos y notas olfativas en PNG sin fondo, y elementos gráficos."},
+  {"grupo": "Para organizarse", "nombre": "Guía y pendientes de MKT", "url": "https://drive.google.com/drive/folders/17EOcrLsZlglNk75yXDyU8PRs7V8OOXxl",
+   "descripcion": "La Guía central de marketing: cómo se arma cada carrusel, las fichas de estilo y lo que quedó pendiente con Flor."},
+  {"grupo": "Para organizarse", "nombre": "Marketing", "url": "https://drive.google.com/drive/folders/1TFXuaSG9Qinoi5vKsrSoiWTbsgqbNZ4S",
+   "descripcion": "Carpeta de marketing: marca e identidad, estrategia, contenido, campañas, recursos, métricas e ideas."},
+  {"grupo": "Para organizarse", "nombre": "Drive de Bartola", "url": "https://drive.google.com/drive/folders/1NaGFVEMJ4TmmiIJLHDoCgcBag16j-i6u",
+   "descripcion": "La carpeta madre: el LEER PRIMERO con las reglas, el TABLERO de tareas (de acá sale esta Oficina) y cómo trabaja cada uno."}
 ]
