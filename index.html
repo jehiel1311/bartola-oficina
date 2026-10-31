@@ -448,7 +448,7 @@ const ICONO_AREA = {WEB:"tienda", OFICINA:"oficina", MKT:"megafono"};
 const ICONO_ESTADO = {"IDEA":"idea","PARA REVISAR":"ojo","PROPUESTA":"lapiz","APROBADO":"check","EN CURSO":"play","PROBADO":"check","POR VERIFICAR":"lupa","PUBLICADO":"listo","HECHO":"listo","MEDIDO":"listo","DESCARTADO":"cerrar"};
 const ic = n => `<svg class="ic" aria-hidden="true"><use href="#i-${n}"/></svg>`;
 const LLAVE_LOCAL = "bartola-oficina-clave";
-let filas = [], enlaces = [], manual = null, filtro = "todo";
+let filas = [], enlaces = [], manual = null, avisosExtra = [], filtro = "todo";
 const DIA = 86400000;
 function hoyAR(){ const a = new Date(Date.now() - 3*3600000); return Date.UTC(a.getUTCFullYear(), a.getUTCMonth(), a.getUTCDate()); }
 function aFecha(t){ const m = /(\d{1,2})\/(\d{1,2})\/(\d{4})/.exec(t || ""); return m ? Date.UTC(+m[3], +m[2]-1, +m[1]) : null; }
@@ -481,7 +481,7 @@ async function entrar(clave, recordar){
   try{
     const d = await abrir(clave);
     if(recordar) guardar(clave);
-    filas = d.filas || []; enlaces = d.enlaces || []; manual = d.manual || null;
+    filas = d.filas || []; enlaces = d.enlaces || []; manual = d.manual || null; avisosExtra = d.avisos || [];
     $("#actualizado").textContent = "Datos del TABLERO al " + d.actualizado;
     const hAR = new Date(Date.now() - 3*3600000).getUTCHours();
     const fecha = new Date().toLocaleDateString("es-AR", {weekday:"long", day:"numeric", month:"long", timeZone:"America/Argentina/Buenos_Aires"});
@@ -613,6 +613,7 @@ function pintarAvisos(){
     const n = diasDesde(f.Fecha);
     if(n !== null && n >= 14) avisos.push({orden: 100 - n/1000, txt: `Prioridad alta abierta ${hace(n)}: ${esc(f.Tarea)}`, id: f.ID});
   });
+  avisosExtra.forEach(t => avisos.push({orden: -1, txt: esc(t), id: "Oficina"}));
   avisos.sort((a,b) => a.orden - b.orden);
   const caja = $("#avisos");
   caja.hidden = !avisos.length;

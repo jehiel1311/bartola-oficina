@@ -2,7 +2,10 @@
 """Genera datos.json (cifrado) a partir del TABLERO exportado como CSV.
 
 Uso:
-    OFICINA_CLAVE='...' python3 herramientas/generar.py tablero.csv
+    OFICINA_CLAVE='...' python3 herramientas/generar.py tablero.csv [--aviso "texto"]...
+
+--aviso agrega un aviso extra en "Para tener en cuenta" (por ejemplo, la
+Papelera llena). Se puede repetir.
 
 La clave se pasa por variable de entorno y nunca se escribe en el repo.
 Cifrado: PBKDF2-SHA256 (250.000 vueltas) + AES-GCM 256, compatible con
@@ -17,12 +20,18 @@ from cryptography.hazmat.primitives import hashes
 ITER = 250_000
 
 def main():
-    if len(sys.argv) != 2:
-        sys.exit("Uso: OFICINA_CLAVE='...' python3 herramientas/generar.py tablero.csv")
+    args = sys.argv[1:]
+    avisos = []
+    while "--aviso" in args:
+        i = args.index("--aviso")
+        avisos.append(args[i + 1])
+        del args[i:i + 2]
+    if len(args) != 1:
+        sys.exit("Uso: OFICINA_CLAVE='...' python3 herramientas/generar.py tablero.csv [--aviso texto]")
     clave = os.environ.get("OFICINA_CLAVE")
     if not clave:
         sys.exit("Falta la variable OFICINA_CLAVE")
-    with open(sys.argv[1], encoding="utf-8-sig", newline="") as f:
+    with open(args[0], encoding="utf-8-sig", newline="") as f:
         filas = [
             {k.strip(): (v or "").strip() for k, v in fila.items() if k}
             for fila in csv.DictReader(f)
@@ -35,6 +44,7 @@ def main():
         "actualizado": datetime.now(ar).strftime("%d/%m/%Y %H:%M"),
         "filas": filas,
         "enlaces": enlaces,
+        "avisos": avisos,
         "manual": json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "manual.json"), encoding="utf-8")) if os.path.exists(os.path.join(os.path.dirname(os.path.abspath(__file__)), "manual.json")) else None,
     }
     sal, iv = os.urandom(16), os.urandom(12)
