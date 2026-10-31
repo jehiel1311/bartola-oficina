@@ -205,6 +205,10 @@ details.det .cuerpo{margin-top:8px;padding:12px 14px;border-radius:12px;backgrou
 .filtros{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:14px}
 .filtros select{padding:9px 14px;border-radius:999px;border:1px solid var(--linea);background:var(--papel);font-size:13.5px}
 .filtros .cuenta-tareas{font-size:13px;color:var(--suave)}
+.ver-hechas{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:999px;border:1px solid var(--linea);background:var(--papel);font-size:13.5px;cursor:pointer}
+.ver-hechas input{accent-color:var(--rosa);width:16px;height:16px}
+.tarea.hecha{opacity:.72}
+.tarea.hecha h3{text-decoration:line-through;text-decoration-color:color-mix(in srgb,var(--suave) 60%,transparent)}
 details.cerradas summary{cursor:pointer;margin-top:12px;font-size:13.5px;color:var(--suave)}
 
 /* Grillas de tarjetas */
@@ -401,7 +405,7 @@ const ICONO_AREA = {WEB:"tienda", OFICINA:"oficina", MKT:"megafono"};
 const ICONO_ESTADO = {"IDEA":"idea","PARA REVISAR":"ojo","PROPUESTA":"lapiz","APROBADO":"check","EN CURSO":"play","PROBADO":"check","POR VERIFICAR":"lupa","PUBLICADO":"listo","HECHO":"listo","MEDIDO":"listo","DESCARTADO":"cerrar"};
 const PRIORIDAD = {Alta:0, Media:1, Baja:2};
 const LLAVE_CLAVE = "bartola-oficina-clave", LLAVE_TEMA = "bartola-oficina-tema";
-let D = null, filas = [], vista = "todo", pantalla = "inicio", pestana = null, segmento = "todo", fArea = "todas", fEstado = "abiertas";
+let D = null, filas = [], vista = "todo", pantalla = "inicio", pestana = null, segmento = "todo", fArea = "todas", fEstado = "abiertas", verHechas = false;
 
 const $ = s => document.querySelector(s);
 const ic = n => `<svg class="ic" aria-hidden="true"><use href="#i-${n}"/></svg>`;
@@ -494,7 +498,7 @@ const decide = p => `<span class="decide ${esc(p)}">${av(p)}Decide: ${esc(p)}</s
 function tarjetaTarea(f, num){
   const n = abierta(f) ? diasDesde(f.Fecha) : null;
   const urls = urlsDe(f["Notas / enlace"]);
-  return `<article class="tarea de-${esc(f.Decide)}">
+  return `<article class="tarea de-${esc(f.Decide)}${abierta(f) ? "" : " hecha"}">
     <div class="linea1">${num ? `<span class="num-dest">${num}</span>` : ""}<span>${esc(AREAS[f["Área"]] || f["Área"])} · ${esc(f.ID)}</span>${chipEstado(f.Estado)}${decide(f.Decide)}</div>
     <h3>${esc(f.Tarea)}</h3>
     <div class="linea2"><span>${av(f["Lo hace"])}Lo hace ${esc(f["Lo hace"])}</span>
@@ -544,19 +548,24 @@ function pintarInicio(){
 /* ---------- Pendientes ---------- */
 function pintarPendientes(){
   const base = filas.filter(deVista).filter(f => fArea === "todas" || f["Área"] === fArea);
-  const lista = base.filter(f => fEstado === "todas" ? true : fEstado === "abiertas" ? abierta(f) : fEstado === "espera" ? ESPERAN.includes(f.Estado) : fEstado === "curso" ? ["EN CURSO","APROBADO"].includes(f.Estado) : !abierta(f))
-    .sort((a,b) => (PRIORIDAD[a.Prioridad] ?? 3) - (PRIORIDAD[b.Prioridad] ?? 3) || (diasDesde(b.Fecha) ?? 0) - (diasDesde(a.Fecha) ?? 0));
+  const orden = (a,b) => (PRIORIDAD[a.Prioridad] ?? 3) - (PRIORIDAD[b.Prioridad] ?? 3) || (diasDesde(b.Fecha) ?? 0) - (diasDesde(a.Fecha) ?? 0);
+  const activas = base.filter(abierta).filter(f => fEstado === "abiertas" ? true : fEstado === "espera" ? ESPERAN.includes(f.Estado) : ["EN CURSO","APROBADO"].includes(f.Estado)).sort(orden);
+  const hechas = verHechas ? base.filter(f => !abierta(f)).sort(orden) : [];
+  const lista = [...activas, ...hechas];
+  const nHechas = base.filter(f => !abierta(f)).length;
   const porArea = {}; lista.forEach(f => (porArea[f["Área"]] ||= []).push(f));
   $("#p-pendientes").innerHTML = `
     <div class="cab"><p class="eyebrow">TABLERO</p><h1>Pendientes</h1><p>Todas las tareas, con quién decide, quién lo hace y hace cuánto están abiertas.${vista === "todo" ? "" : ` Mostrando las de ${vista}.`}</p></div>
     <div class="filtros">
       <select id="f-area" aria-label="Área"><option value="todas">Todas las áreas</option>${Object.entries(AREAS).map(([k,v]) => `<option value="${k}" ${fArea === k ? "selected" : ""}>${v}</option>`).join("")}</select>
-      <select id="f-estado" aria-label="Estado">${[["abiertas","Abiertas"],["espera","Esperan decisión"],["curso","Aprobadas o en curso"],["cerradas","Cerradas"],["todas","Todas"]].map(([k,v]) => `<option value="${k}" ${fEstado === k ? "selected" : ""}>${v}</option>`).join("")}</select>
-      <span class="cuenta-tareas">${lista.length} ${lista.length === 1 ? "tarea" : "tareas"}</span>
+      <select id="f-estado" aria-label="Estado">${[["abiertas","Abiertas"],["espera","Esperan decisión"],["curso","Aprobadas o en curso"]].map(([k,v]) => `<option value="${k}" ${fEstado === k ? "selected" : ""}>${v}</option>`).join("")}</select>
+      <label class="ver-hechas"><input type="checkbox" id="f-hechas" ${verHechas ? "checked" : ""}> Mostrar realizadas (${nHechas})</label>
+      <span class="cuenta-tareas">${activas.length} ${activas.length === 1 ? "tarea" : "tareas"}${verHechas && hechas.length ? ` + ${hechas.length} realizadas` : ""}</span>
     </div>
     ${Object.keys(AREAS).filter(a => porArea[a]).map(a => `<div class="titulo-sec" style="margin-top:22px"><h2 style="display:flex;align-items:center;gap:10px">${ic(ICONO_AREA[a])}${AREAS[a]}</h2></div><div class="tareas">${porArea[a].map(f => tarjetaTarea(f)).join("")}</div>`).join("") || `<p class="muted">No hay tareas con estos filtros.</p>`}`;
   $("#f-area").onchange = e => { fArea = e.target.value; pintarPendientes(); };
   $("#f-estado").onchange = e => { fEstado = e.target.value; pintarPendientes(); };
+  $("#f-hechas").onchange = e => { verHechas = e.target.checked; pintarPendientes(); };
 }
 
 /* ---------- Manual ---------- */
