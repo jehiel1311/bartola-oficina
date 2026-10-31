@@ -50,19 +50,31 @@ button,input{font:inherit;color:inherit}
 @media (prefers-color-scheme: dark){.error{color:#F0A2A5}}
 
 /* Oficina */
-.oficina{max-width:960px;margin:0 auto;padding:40px 22px 64px}
-.cabecera{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px;padding-bottom:22px;border-bottom:1px solid var(--linea)}
-.cabecera h1{font-family:var(--serif);font-weight:500;font-size:clamp(30px,6vw,42px);line-height:1.05;margin:0}
+.oficina{max-width:980px;margin:0 auto;padding:22px 18px 64px}
+.cabecera{position:relative;display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px;padding:34px 30px 28px;border-radius:26px;overflow:hidden;
+  background:
+    radial-gradient(120% 140% at 0% 0%, var(--rosa-claro) 0%, transparent 55%),
+    radial-gradient(90% 120% at 100% 100%, var(--beige) 0%, transparent 60%),
+    linear-gradient(115deg, var(--papel) 0%, var(--fondo) 100%);
+  border:1px solid var(--linea)}
+.cabecera::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.55;
+  background:repeating-linear-gradient(118deg, transparent 0 22px, rgba(255,255,255,.35) 22px 23px, transparent 23px 60px)}
+@media (prefers-color-scheme: dark){.cabecera::after{opacity:.08}}
+.cabecera > *{position:relative;z-index:1}
+.cabecera h1{font-family:var(--serif);font-weight:500;font-size:clamp(30px,6vw,44px);line-height:1.05;margin:0}
 .cabecera p{margin:6px 0 0;color:var(--tinta-suave);font-size:13px}
-.salir{background:none;border:1px solid var(--linea);border-radius:999px;padding:7px 14px;font-size:13px;cursor:pointer;color:var(--tinta-suave)}
+.salir{background:var(--papel);border:1px solid var(--linea);border-radius:999px;padding:7px 14px;font-size:13px;cursor:pointer;color:var(--tinta-suave)}
 .salir:hover{border-color:var(--rosa);color:var(--tinta)}
 
 /* Lo que espera a cada uno: el elemento protagonista */
 .esperan{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:0;margin:34px 0 10px;border:1px solid var(--linea);border-radius:20px;overflow:hidden;background:var(--papel)}
 .persona{padding:26px 26px 22px}
+.inicial{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;font-family:var(--serif);font-size:20px;background:var(--rosa-claro);color:var(--tinta);flex:none}
+.persona:nth-child(2) .inicial{background:var(--beige)}
 .persona + .persona{border-left:1px solid var(--linea)}
 @media (max-width:600px){.persona + .persona{border-left:0;border-top:1px solid var(--linea)}}
-.persona-cab{display:flex;align-items:baseline;gap:14px}
+.persona-cab{display:flex;align-items:center;gap:14px}
+.persona-cab .cuenta{margin-left:auto}
 .cuenta{font-family:var(--serif);font-size:56px;line-height:.9;color:var(--rosa);font-variant-numeric:lining-nums}
 .persona h2{font-family:var(--serif);font-weight:500;font-size:24px;margin:0}
 .persona-cab .sub{display:block;font-size:13px;color:var(--tinta-suave)}
@@ -78,9 +90,9 @@ button,input{font:inherit;color:inherit}
 @media (prefers-color-scheme: dark){.logo.oscuro-invertir{filter:invert(1) hue-rotate(180deg)}}
 
 /* Enlaces rápidos */
-.enlaces{display:flex;flex-wrap:wrap;gap:6px 18px;margin:16px 0 0;padding:0;list-style:none;font-size:13px}
-.enlaces a{color:var(--tinta-suave);text-decoration:none;border-bottom:1px solid var(--rosa-claro);padding-bottom:1px}
-.enlaces a:hover{color:var(--tinta);border-color:var(--rosa)}
+.enlaces{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 0;padding:0;list-style:none;font-size:13px}
+.enlaces a{display:inline-block;color:var(--tinta);text-decoration:none;padding:7px 14px;border-radius:999px;background:var(--papel);border:1px solid var(--linea)}
+.enlaces a:hover{border-color:var(--rosa);background:var(--rosa-claro)}
 
 /* Avisos */
 .avisos{margin:28px 0 0;padding:16px 20px;border-left:3px solid var(--rosa);background:var(--rosa-claro);border-radius:0 14px 14px 0}
@@ -95,13 +107,21 @@ button,input{font:inherit;color:inherit}
 .filtro button[aria-pressed="true"]{background:var(--rosa-claro);border-color:var(--rosa-claro);color:var(--tinta);font-weight:600}
 
 /* Áreas */
-.area{margin-top:34px}
+.area{margin-top:22px;padding:22px 26px 8px;background:var(--papel);border:1px solid var(--linea);border-radius:20px}
+@media (max-width:520px){.area{padding:18px 18px 6px}}
 .area > h2{font-family:var(--serif);font-weight:500;font-size:22px;margin:0 0 4px;display:flex;align-items:baseline;gap:10px}
 .area > h2 small{font-family:var(--sans);font-size:13px;color:var(--tinta-suave);font-weight:400}
-.tarea{display:grid;grid-template-columns:1fr auto;gap:4px 18px;padding:16px 0;border-bottom:1px solid var(--linea)}
+.tarea{display:grid;grid-template-columns:1fr auto;gap:4px 18px;padding:16px 0;border-top:1px solid var(--linea)}
+.area > h2 + .tarea{border-top:0}
 .tarea h3{margin:0;font-size:15px;font-weight:600;line-height:1.4}
 .tarea .id{color:var(--tinta-suave);font-weight:500;margin-right:6px}
-.estado{grid-row:1/3;grid-column:2;align-self:start;white-space:nowrap;font-size:12px;font-weight:600;padding:4px 10px;border-radius:999px;background:var(--beige)}
+.estado{grid-row:1/3;grid-column:2;align-self:start;white-space:nowrap;font-size:11.5px;font-weight:600;padding:4px 11px 4px 9px;border-radius:999px;background:var(--beige);display:inline-flex;align-items:center;gap:6px;text-transform:lowercase}
+.estado::first-letter{text-transform:uppercase}
+.estado::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--tinta-suave)}
+.estado[data-e="PARA REVISAR"]::before,.estado[data-e="PROPUESTA"]::before,.estado[data-e="IDEA"]::before{background:var(--rosa)}
+.estado[data-e="EN CURSO"]::before,.estado[data-e="APROBADO"]::before{background:var(--rosa)}
+.estado[data-e="POR VERIFICAR"]::before{background:#C9A27E}
+.estado[data-e="HECHO"]::before,.estado[data-e="PUBLICADO"]::before{background:#8FB39A}
 .estado[data-e="PARA REVISAR"],.estado[data-e="PROPUESTA"],.estado[data-e="IDEA"]{background:var(--rosa-claro)}
 .estado[data-e="EN CURSO"],.estado[data-e="APROBADO"]{background:var(--tinta);color:var(--fondo)}
 .quien{font-size:13px;color:var(--tinta-suave)}
@@ -223,8 +243,8 @@ function pintarEsperan(){
       ? `<ul>${suyas.map(f => `<li>${esc(f.Tarea)} <small>· ${esc(f.ID)}</small></li>`).join("")}</ul>`
       : `<p class="nada">Nada esperando. Al día.</p>`;
     return `<article class="persona">
-      <div class="persona-cab"><span class="cuenta">${suyas.length}</span>
-      <div><h2>${p}</h2><span class="sub">${suyas.length === 1 ? "espera su decisión" : "esperan su decisión"}</span></div></div>
+      <div class="persona-cab"><span class="inicial" aria-hidden="true">${p[0]}</span>
+      <div><h2>${p}</h2><span class="sub">${suyas.length === 1 ? "espera su decisión" : "esperan su decisión"}</span></div><span class="cuenta">${suyas.length}</span></div>
       ${items}</article>`;
   }).join("");
   $("#esperan").innerHTML = html;
