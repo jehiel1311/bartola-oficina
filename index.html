@@ -101,11 +101,35 @@ button,input{font:inherit;color:inherit}
 .grupo{margin-top:18px}
 .grupo h3{font-size:13px;font-weight:600;color:var(--tinta-suave);margin:0 0 10px}
 .tarjetas{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px}
-.tarjeta{display:block;padding:16px 18px;border-radius:16px;background:var(--papel);border:1px solid var(--linea);color:inherit;text-decoration:none;transition:border-color .15s,background .15s}
+.tarjeta{display:flex;gap:14px;align-items:flex-start;width:100%;text-align:left;padding:16px;border-radius:18px;background:var(--papel);border:1px solid var(--linea);color:inherit;cursor:pointer;font:inherit;transition:border-color .15s,transform .15s}
 .tarjeta:hover{border-color:var(--rosa)}
-.tarjeta strong{display:block;font-size:15px;margin-bottom:4px}
-.tarjeta strong::after{content:" ↗";color:var(--rosa);font-weight:400}
-.tarjeta span{display:block;font-size:13px;color:var(--tinta-suave);line-height:1.5}
+@media (prefers-reduced-motion:no-preference){.tarjeta:hover{transform:translateY(-1px)}}
+.tarjeta strong{display:block;font-size:15px;margin:1px 0 3px}
+.tarjeta span.txt{display:block;font-size:13px;color:var(--tinta-suave);line-height:1.5}
+
+/* Íconos */
+.ic{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.ic-caja{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;background:var(--rosa-claro);color:var(--tinta);flex:none}
+.ic-caja .ic{width:21px;height:21px}
+
+/* Detalle antes de abrir un acceso */
+dialog.detalle{border:0;padding:0;border-radius:24px;width:min(460px,calc(100vw - 32px));background:var(--papel);color:var(--tinta);box-shadow:0 24px 60px rgba(42,42,42,.22)}
+dialog.detalle::backdrop{background:rgba(42,42,42,.35);backdrop-filter:blur(3px)}
+.detalle-cab{display:flex;align-items:center;gap:14px;padding:24px 24px 6px}
+.detalle-cab h2{font-family:var(--serif);font-weight:500;font-size:24px;margin:0;line-height:1.15}
+.detalle-cab p{margin:2px 0 0;font-size:13px;color:var(--tinta-suave)}
+.detalle-x{margin-left:auto;align-self:flex-start;background:none;border:0;padding:6px;border-radius:50%;cursor:pointer;color:var(--tinta-suave)}
+.detalle-x:hover{background:var(--fondo);color:var(--tinta)}
+.detalle-cuerpo{padding:10px 24px 4px}
+.detalle-cuerpo h3{font-size:12.5px;font-weight:600;color:var(--tinta-suave);margin:10px 0 6px}
+.detalle-cuerpo ul{margin:0;padding-left:18px;font-size:14px}
+.detalle-cuerpo li{padding:3px 0}
+.consejo{display:flex;gap:10px;align-items:flex-start;margin:16px 0 0;padding:12px 14px;border-radius:14px;background:var(--fondo);font-size:13.5px}
+.consejo .ic{color:var(--rosa);margin-top:1px}
+.detalle-pie{display:flex;gap:10px;justify-content:flex-end;padding:20px 24px 24px}
+.abrir{display:inline-flex;align-items:center;gap:8px;padding:11px 18px;border-radius:999px;background:var(--tinta);color:var(--fondo);text-decoration:none;font-weight:600;font-size:14px}
+.abrir .ic{width:16px;height:16px}
+.volver{padding:11px 16px;border-radius:999px;background:none;border:1px solid var(--linea);cursor:pointer;font-size:14px;color:var(--tinta-suave)}
 
 /* Cómo leer la Oficina */
 .guia{margin-top:14px;border:1px solid var(--linea);border-radius:16px;background:var(--papel);padding:0 18px}
@@ -118,7 +142,7 @@ button,input{font:inherit;color:inherit}
 
 /* Avisos */
 .avisos{margin:28px 0 0;padding:16px 20px;border-left:3px solid var(--rosa);background:var(--rosa-claro);border-radius:0 14px 14px 0}
-.avisos h2{font-family:var(--serif);font-weight:500;font-size:18px;margin:0 0 6px}
+.avisos h2{font-family:var(--serif);font-weight:500;font-size:18px;margin:0 0 6px;display:flex;align-items:center;gap:8px}
 .avisos ul{margin:0;padding-left:18px}
 .avisos li{font-size:14px;padding:3px 0}
 .avisos small{color:var(--tinta-suave)}
@@ -131,7 +155,9 @@ button,input{font:inherit;color:inherit}
 /* Áreas */
 .area{margin-top:22px;padding:22px 26px 8px;background:var(--papel);border:1px solid var(--linea);border-radius:20px}
 @media (max-width:520px){.area{padding:18px 18px 6px}}
-.area > h2{font-family:var(--serif);font-weight:500;font-size:22px;margin:0 0 4px;display:flex;align-items:baseline;gap:10px}
+.area > h2{font-family:var(--serif);font-weight:500;font-size:22px;margin:0 0 4px;display:flex;align-items:center;gap:12px}
+.area > h2 .ic-caja{width:34px;height:34px;border-radius:10px}
+.area > h2 .ic-caja .ic{width:18px;height:18px}
 .area > h2 small{font-family:var(--sans);font-size:13px;color:var(--tinta-suave);font-weight:400}
 .tarea{display:grid;grid-template-columns:1fr auto;gap:4px 18px;padding:16px 0;border-top:1px solid var(--linea)}
 .area-resumen + .tarea{border-top:0}
@@ -167,6 +193,26 @@ details.cerradas .tarea{opacity:.7}
 </head>
 <body>
 
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-tienda" viewBox="0 0 24 24"><path d="M3.5 9 5 4h14l1.5 5"/><path d="M3.5 9h17a2.8 2.8 0 0 1-5.6 0 2.8 2.8 0 0 1-5.8 0 2.8 2.8 0 0 1-5.6 0Z"/><path d="M5 12v8h14v-8M10 20v-5h4v5"/></symbol>
+    <symbol id="i-logo" viewBox="0 0 24 24"><path d="M6.5 3.5h11l3.5 5.5-9 11.5L3 9z"/><path d="M3 9h18M9.5 3.5 12 9l2.5-5.5M12 9v11.5"/></symbol>
+    <symbol id="i-paleta" viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 0 18c1 0 1.6-.8 1.6-1.6 0-1.2-1-1.5-1-2.5 0-.9.7-1.6 1.6-1.6H16a5 5 0 0 0 5-5C21 6.6 17 3 12 3Z"/><circle cx="7.5" cy="11" r="1.1"/><circle cx="9.8" cy="7" r="1.1"/><circle cx="14.6" cy="7" r="1.1"/></symbol>
+    <symbol id="i-capas" viewBox="0 0 24 24"><path d="m12 3 9 5-9 5-9-5z"/><path d="m3 12.5 9 5 9-5"/><path d="m3 16.5 9 5 9-5"/></symbol>
+    <symbol id="i-libro" viewBox="0 0 24 24"><path d="M3 5h6a3 3 0 0 1 3 3v12a2 2 0 0 0-2-2H3z"/><path d="M21 5h-6a3 3 0 0 0-3 3v12a2 2 0 0 1 2-2h7z"/></symbol>
+    <symbol id="i-etiqueta" viewBox="0 0 24 24"><path d="M3.5 12.3V3.5h8.8l8.7 8.7-8.8 8.8z"/><circle cx="8" cy="8" r="1.5"/></symbol>
+    <symbol id="i-imagen" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2.5"/><circle cx="9" cy="10" r="1.8"/><path d="m21 16-5-5-9 9"/></symbol>
+    <symbol id="i-lista" viewBox="0 0 24 24"><path d="M10 6h11M10 12h11M10 18h11"/><path d="m3.5 6 1.2 1.2L7 5M3.5 12l1.2 1.2L7 11M3.5 18l1.2 1.2L7 17"/></symbol>
+    <symbol id="i-megafono" viewBox="0 0 24 24"><path d="M3 10v4h3l8 5V5L6 10z"/><path d="M17.5 9a4 4 0 0 1 0 6M7 14l1.5 5.5h2.5L10 14.5"/></symbol>
+    <symbol id="i-carpeta" viewBox="0 0 24 24"><path d="M3 7a2 2 0 0 1 2-2h4.2l2 2.2H19a2 2 0 0 1 2 2V17a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></symbol>
+    <symbol id="i-campana" viewBox="0 0 24 24"><path d="M6 16v-5a6 6 0 0 1 12 0v5l1.5 2h-15z"/><path d="M10 20.5a2 2 0 0 0 4 0"/></symbol>
+    <symbol id="i-oficina" viewBox="0 0 24 24"><rect x="3" y="3.5" width="18" height="17" rx="2.5"/><path d="M3 9h18M9 9v11.5"/></symbol>
+    <symbol id="i-afuera" viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></symbol>
+    <symbol id="i-cerrar" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+    <symbol id="i-idea" viewBox="0 0 24 24"><path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-3.5 10.9c.6.4 1 1.1 1 1.9V16h5v-.2c0-.8.4-1.5 1-1.9A6 6 0 0 0 12 3Z"/></symbol>
+  </defs>
+</svg>
+
 <main class="entrada" id="entrada">
   <form id="form" autocomplete="off">
     <img class="logo oscuro-invertir" src="logo.png" alt="Bartola Beauty" width="440" height="220" onerror="this.remove();document.getElementById('marca').hidden=false">
@@ -196,7 +242,7 @@ details.cerradas .tarea{opacity:.7}
 
   <section class="accesos" aria-labelledby="t-accesos">
     <h2 id="t-accesos">Dónde está cada cosa</h2>
-    <p>Un toque y entrás. Cada acceso dice qué vas a encontrar.</p>
+    <p>Tocá un acceso y te cuento qué hay antes de abrirlo.</p>
     <div id="accesos"></div>
     <details class="guia">
       <summary>Cómo leer esta Oficina</summary>
@@ -227,10 +273,29 @@ details.cerradas .tarea{opacity:.7}
   <p class="pie">Se arma con el TABLERO de Drive. Si algo no coincide, manda Drive.</p>
 </div>
 
+<dialog class="detalle" id="detalle" aria-labelledby="d-titulo">
+  <div class="detalle-cab">
+    <span class="ic-caja" id="d-icono"></span>
+    <div><h2 id="d-titulo"></h2><p id="d-desc"></p></div>
+    <button class="detalle-x" type="button" data-cerrar aria-label="Cerrar"><svg class="ic"><use href="#i-cerrar"/></svg></button>
+  </div>
+  <div class="detalle-cuerpo">
+    <h3>Qué vas a encontrar</h3>
+    <ul id="d-lista"></ul>
+    <div class="consejo" id="d-consejo"><svg class="ic"><use href="#i-idea"/></svg><span></span></div>
+  </div>
+  <div class="detalle-pie">
+    <button class="volver" type="button" data-cerrar>Volver</button>
+    <a class="abrir" id="d-abrir" target="_blank" rel="noopener"></a>
+  </div>
+</dialog>
+
 <script>
 const CERRADOS = ["HECHO","PUBLICADO","MEDIDO","DESCARTADO"];
 const ESPERAN = ["PARA REVISAR","PROPUESTA","IDEA","POR VERIFICAR"];
 const AREAS = {WEB:"Tienda web", OFICINA:"Oficina", MKT:"Marketing"};
+const ICONO_AREA = {WEB:"tienda", OFICINA:"oficina", MKT:"megafono"};
+const ic = n => `<svg class="ic" aria-hidden="true"><use href="#i-${n}"/></svg>`;
 const LLAVE_LOCAL = "bartola-oficina-clave";
 let filas = [], enlaces = [], filtro = "todo";
 const DIA = 86400000;
@@ -314,8 +379,19 @@ function pintarEnlaces(){
   const grupos = {};
   enlaces.forEach(e => (grupos[e.grupo || "Accesos"] ||= []).push(e));
   $("#accesos").innerHTML = Object.entries(grupos).map(([g, lista]) => `<div class="grupo"><h3>${esc(g)}</h3><div class="tarjetas">${
-    lista.map(e => `<a class="tarjeta" href="${esc(e.url)}" target="_blank" rel="noopener"><strong>${esc(e.nombre)}</strong>${e.descripcion ? `<span>${esc(e.descripcion)}</span>` : ""}</a>`).join("")
+    lista.map(e => `<button type="button" class="tarjeta" data-i="${enlaces.indexOf(e)}"><span class="ic-caja">${ic(e.icono || "carpeta")}</span><span><strong>${esc(e.nombre)}</strong><span class="txt">${esc(e.descripcion || "")}</span></span></button>`).join("")
   }</div></div>`).join("");
+}
+
+function abrirDetalle(e){
+  const d = $("#detalle");
+  $("#d-icono").innerHTML = ic(e.icono || "carpeta");
+  $("#d-titulo").textContent = e.nombre;
+  $("#d-desc").textContent = e.descripcion || "";
+  $("#d-lista").innerHTML = (e.detalle || []).map(x => `<li>${esc(x)}</li>`).join("");
+  const c = $("#d-consejo"); c.hidden = !e.consejo; c.querySelector("span").textContent = e.consejo || "";
+  const a = $("#d-abrir"); a.href = e.url; a.innerHTML = `Abrir ${esc(e.abre || "")} ${ic("afuera")}`;
+  if(typeof d.showModal === "function") d.showModal(); else window.open(e.url, "_blank", "noopener");
 }
 
 function pintarResumen(){
@@ -356,7 +432,7 @@ function pintarAvisos(){
   avisos.sort((a,b) => a.orden - b.orden);
   const caja = $("#avisos");
   caja.hidden = !avisos.length;
-  caja.innerHTML = avisos.length ? `<h2>Para tener en cuenta</h2><ul>${avisos.map(a => `<li>${a.txt} <small>· ${esc(a.id)}</small></li>`).join("")}</ul>` : "";
+  caja.innerHTML = avisos.length ? `<h2>${ic("campana")} Para tener en cuenta</h2><ul>${avisos.map(a => `<li>${a.txt} <small>· ${esc(a.id)}</small></li>`).join("")}</ul>` : "";
 }
 
 function pintar(){
@@ -372,7 +448,7 @@ function pintar(){
     const abiertas = grupos[a].filter(f => !CERRADOS.includes(f.Estado));
     const cerradas = grupos[a].filter(f => CERRADOS.includes(f.Estado));
     return `<section class="area">
-      <h2>${esc(AREAS[a] || a)} <small>${abiertas.length} abiertas</small></h2>
+      <h2><span class="ic-caja">${ic(ICONO_AREA[a] || "carpeta")}</span>${esc(AREAS[a] || a)} <small>${abiertas.length} abiertas</small></h2>
       <p class="area-resumen">${resumenArea(grupos[a])}</p>
       ${abiertas.map(tarea).join("")}
       ${cerradas.length ? `<details class="cerradas"><summary>${cerradas.length} cerradas</summary>${cerradas.map(tarea).join("")}</details>` : ""}
@@ -381,6 +457,10 @@ function pintar(){
 }
 
 $("#form").addEventListener("submit", e => { e.preventDefault(); entrar($("#clave").value, $("#recordar").checked); });
+$("#accesos").addEventListener("click", ev => { const b = ev.target.closest(".tarjeta"); if(b) abrirDetalle(enlaces[+b.dataset.i]); });
+document.querySelectorAll("[data-cerrar]").forEach(b => b.addEventListener("click", () => $("#detalle").close()));
+$("#detalle").addEventListener("click", ev => { if(ev.target === ev.currentTarget) ev.currentTarget.close(); });
+$("#d-abrir").addEventListener("click", () => setTimeout(() => $("#detalle").close(), 100));
 $("#salir").addEventListener("click", () => { borrarGuardada(); location.reload(); });
 document.querySelectorAll(".filtro button").forEach(b => b.addEventListener("click", () => {
   filtro = b.dataset.f;
