@@ -94,7 +94,11 @@ button,input{font:inherit;color:inherit}
 .cuenta{font-family:var(--serif);font-size:56px;line-height:.9;color:var(--rosa);font-variant-numeric:lining-nums}
 .persona h2{font-family:var(--serif);font-weight:500;font-size:24px;margin:0}
 .persona-cab .sub{display:block;font-size:13px;color:var(--tinta-suave)}
-.persona ul{list-style:none;margin:18px 0 0;padding:0}
+.persona ul{list-style:none;margin:0;padding:0}
+.sub-area{margin-top:18px}
+.sub-area h3{display:flex;align-items:center;gap:7px;margin:0 0 4px;font-size:12.5px;font-weight:600;color:var(--tinta-suave)}
+.sub-area h3 .ic{width:15px;height:15px;color:var(--rosa)}
+.sub-area h3 small{font-weight:500;background:var(--fondo);border-radius:999px;padding:0 7px}
 .persona li{padding:9px 0;border-top:1px dashed var(--linea);font-size:14px}
 .persona li small{color:var(--tinta-suave)}
 .persona .nada{color:var(--tinta-suave);font-style:italic;font-family:var(--serif);font-size:16px;margin-top:16px}
@@ -397,8 +401,11 @@ async function entrar(clave, recordar){
 function pintarEsperan(){
   const html = ["Flor","Yeyo"].map(p => {
     const suyas = filas.filter(f => f.Decide === p && ESPERAN.includes(f.Estado));
+    const porArea = {};
+    suyas.forEach(f => (porArea[f["Área"]] ||= []).push(f));
+    const orden = Object.keys(AREAS).filter(k => porArea[k]).concat(Object.keys(porArea).filter(k => !AREAS[k]));
     const items = suyas.length
-      ? `<ul>${suyas.map(f => `<li>${esc(f.Tarea)} <small>· ${esc(f.ID)}</small></li>`).join("")}</ul>`
+      ? orden.map(k => `<div class="sub-area"><h3>${ic(ICONO_AREA[k] || "carpeta")}${esc(AREAS[k] || k)} <small>${porArea[k].length}</small></h3><ul>${porArea[k].map(f => `<li>${esc(f.Tarea)} <small>· ${esc(f.ID)}</small></li>`).join("")}</ul></div>`).join("")
       : `<p class="nada">Nada esperando. Al día.</p>`;
     return `<article class="persona" data-p="${p}">
       <div class="persona-cab"><span class="inicial" aria-hidden="true">${p[0]}</span>
