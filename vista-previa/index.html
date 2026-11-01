@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
 <title>Oficina · Bartola Beauty</title>
-<link rel="icon" type="image/png" href="favicon.png">
-<link rel="apple-touch-icon" href="favicon.png">
+<link rel="icon" type="image/png" href="../favicon.png">
+<link rel="apple-touch-icon" href="../favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
@@ -172,8 +172,8 @@ details.det .cuerpo{margin-top:8px;padding:12px 14px;border-radius:12px;backgrou
 
 /* Avatares (máscara: toman el color de cada persona) */
 .av{display:inline-block;width:18px;height:18px;flex:none;background:currentColor;-webkit-mask:var(--img) center/contain no-repeat;mask:var(--img) center/contain no-repeat;vertical-align:-4px}
-.av.Flor{--img:url("avatar-flor.png");color:var(--flor)}
-.av.Yeyo{--img:url("avatar-yeyo.png");color:var(--yeyo)}
+.av.Flor{--img:url("../avatar-flor.png");color:var(--flor)}
+.av.Yeyo{--img:url("../avatar-yeyo.png");color:var(--yeyo)}
 .av-caja{display:grid;place-items:center;border-radius:50%;flex:none}
 .av-caja.Flor{background:var(--flor-bg);border:1px solid var(--flor-borde)}
 .av-caja.Yeyo{background:var(--yeyo-bg);border:1px solid var(--yeyo-borde)}
@@ -339,7 +339,7 @@ dialog::backdrop{background:rgba(42,42,42,.35);backdrop-filter:blur(3px)}
 
 <main class="entrada" id="entrada">
   <form id="form" autocomplete="off">
-    <picture><source srcset="LOGO%20Blanco.png" media="(prefers-color-scheme: dark)"><img class="logo" src="LOGO%20Color.png" alt="Bartola Beauty"></picture>
+    <picture><source srcset="../LOGO%20Blanco.png" media="(prefers-color-scheme: dark)"><img class="logo" src="../LOGO%20Color.png" alt="Bartola Beauty"></picture>
     <p>Oficina de Flor y Yeyo</p>
     <input class="campo" id="clave" type="password" placeholder="Contraseña" aria-label="Contraseña" required autofocus>
     <label class="recordar"><input type="checkbox" id="recordar"> Recordarme en este dispositivo</label>
@@ -350,7 +350,7 @@ dialog::backdrop{background:rgba(42,42,42,.35);backdrop-filter:blur(3px)}
 
 <div class="shell" id="oficina" hidden>
   <aside>
-    <picture><source srcset="LOGO%20Blanco.png" media="(prefers-color-scheme: dark)"><img class="logo" id="logo-aside" src="LOGO%20Color.png" alt="Bartola Beauty"></picture>
+    <picture><source srcset="../LOGO%20Blanco.png" media="(prefers-color-scheme: dark)"><img class="logo" id="logo-aside" src="../LOGO%20Color.png" alt="Bartola Beauty"></picture>
     <nav class="menu" aria-label="Secciones">
       <button class="navitem" data-ir="inicio"><svg class="ic"><use href="#i-inicio"/></svg>Inicio</button>
       <button class="navitem" data-ir="pendientes"><svg class="ic"><use href="#i-tareas"/></svg>Pendientes<span class="num" id="n-pend"></span></button>
