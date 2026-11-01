@@ -402,7 +402,7 @@ const CERRADOS = ["HECHO","PUBLICADO","MEDIDO","DESCARTADO"];
 const ESPERAN = ["PARA REVISAR","PROPUESTA","IDEA","POR VERIFICAR"];
 const AREAS = {WEB:"Tienda web", OFICINA:"Oficina", MKT:"Marketing"};
 const ICONO_AREA = {WEB:"tienda", OFICINA:"oficina", MKT:"megafono"};
-const ICONO_ESTADO = {"IDEA":"idea","PARA REVISAR":"ojo","PROPUESTA":"lapiz","APROBADO":"check","EN CURSO":"play","PROBADO":"check","POR VERIFICAR":"lupa","PUBLICADO":"listo","HECHO":"listo","MEDIDO":"listo","DESCARTADO":"cerrar"};
+const ICONO_ESTADO = {"IDEA":"idea","PARA REVISAR":"ojo","PROPUESTA":"lapiz","PARA HACER":"check","APROBADO":"check","EN CURSO":"play","PROBADO":"check","POR VERIFICAR":"lupa","PUBLICADO":"listo","HECHO":"listo","MEDIDO":"listo","DESCARTADO":"cerrar"};
 const PRIORIDAD = {Alta:0, Media:1, Baja:2};
 const LLAVE_CLAVE = "bartola-oficina-clave", LLAVE_TEMA = "bartola-oficina-tema";
 let D = null, filas = [], vista = "todo", pantalla = "inicio", pestana = null, segmento = "todo", fArea = "todas", fEstado = "abiertas", verHechas = false;
@@ -487,7 +487,7 @@ async function metaDiseno(){
 }
 
 /* ---------- Piezas comunes ---------- */
-const claseEstado = e => CERRADOS.includes(e) ? "st-cerrada" : ["EN CURSO","APROBADO"].includes(e) ? "st-curso" : ESPERAN.includes(e) ? "st-espera" : "";
+const claseEstado = e => CERRADOS.includes(e) ? "st-cerrada" : ["EN CURSO","PARA HACER","APROBADO"].includes(e) ? "st-curso" : ESPERAN.includes(e) ? "st-espera" : "";
 const chipEstado = e => `<span class="chip ${claseEstado(e)}">${ic(ICONO_ESTADO[e] || "idea")}${esc(e.toLowerCase())}</span>`;
 const ESTADO_TXT = {"confirmado":["Confirmado","listo"],"en-uso":["En uso, falta confirmar","reloj"],"falta":["Falta definir","idea"]};
 const chip = e => { const [t, i] = ESTADO_TXT[e] || ESTADO_TXT.falta; return `<span class="chip ${e}">${ic(i)}${t}</span>`; };
@@ -549,7 +549,7 @@ function pintarInicio(){
 function pintarPendientes(){
   const base = filas.filter(deVista).filter(f => fArea === "todas" || f["Área"] === fArea);
   const orden = (a,b) => (PRIORIDAD[a.Prioridad] ?? 3) - (PRIORIDAD[b.Prioridad] ?? 3) || (diasDesde(b.Fecha) ?? 0) - (diasDesde(a.Fecha) ?? 0);
-  const activas = base.filter(abierta).filter(f => fEstado === "abiertas" ? true : fEstado === "espera" ? ESPERAN.includes(f.Estado) : ["EN CURSO","APROBADO"].includes(f.Estado)).sort(orden);
+  const activas = base.filter(abierta).filter(f => fEstado === "abiertas" ? true : fEstado === "espera" ? ESPERAN.includes(f.Estado) : ["EN CURSO","PARA HACER","APROBADO"].includes(f.Estado)).sort(orden);
   const hechas = verHechas ? base.filter(f => !abierta(f)).sort(orden) : [];
   const lista = [...activas, ...hechas];
   const nHechas = base.filter(f => !abierta(f)).length;
@@ -558,7 +558,7 @@ function pintarPendientes(){
     <div class="cab"><p class="eyebrow">TABLERO</p><h1>Pendientes</h1><p>Todas las tareas, con quién decide, quién lo hace y hace cuánto están abiertas.${vista === "todo" ? "" : ` Mostrando las de ${vista}.`}</p></div>
     <div class="filtros">
       <select id="f-area" aria-label="Área"><option value="todas">Todas las áreas</option>${Object.entries(AREAS).map(([k,v]) => `<option value="${k}" ${fArea === k ? "selected" : ""}>${v}</option>`).join("")}</select>
-      <select id="f-estado" aria-label="Estado">${[["abiertas","Abiertas"],["espera","Esperan decisión"],["curso","Aprobadas o en curso"]].map(([k,v]) => `<option value="${k}" ${fEstado === k ? "selected" : ""}>${v}</option>`).join("")}</select>
+      <select id="f-estado" aria-label="Estado">${[["abiertas","Abiertas"],["espera","Esperan decisión"],["curso","Para hacer o en curso"]].map(([k,v]) => `<option value="${k}" ${fEstado === k ? "selected" : ""}>${v}</option>`).join("")}</select>
       <label class="ver-hechas"><input type="checkbox" id="f-hechas" ${verHechas ? "checked" : ""}> Mostrar realizadas (${nHechas})</label>
       <span class="cuenta-tareas">${activas.length} ${activas.length === 1 ? "tarea" : "tareas"}${verHechas && hechas.length ? ` + ${hechas.length} realizadas` : ""}</span>
     </div>
